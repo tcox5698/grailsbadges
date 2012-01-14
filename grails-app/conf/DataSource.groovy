@@ -34,11 +34,11 @@ environments {
             dbCreate = "validate" // one of 'create', 'create-drop', 'update', 'validate', ''
             driverClassName = "org.postgresql.Driver"
             dialect = "org.hibernate.dialect.PostgreSQLDialect"
-            uri = new URI(System.env.DATABASE_URL)
+            //uri = new URI(System.env.DATABASE_URL)
     
-            url = "jdbc:postgresql://"+uri.host+uri.path
-            username = uri.userInfo.split(":")[0]
-            password = uri.userInfo.split(":")[1]
+            url = System.env.DATABASE_URL
+            //username = uri.userInfo.split(":")[0]
+            //password = uri.userInfo.split(":")[1]
         }
     }
 }
