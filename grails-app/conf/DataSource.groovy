@@ -35,7 +35,10 @@ environments {
         dataSource {
             dbCreate = "validate" // one of 'create', 'create-drop', 'update', 'validate', ''
             driverClassName = "org.postgresql.Driver"
-            dialect = "org.hibernate.dialect.PostgreSQLDialect"           
+            dialect = "org.hibernate.dialect.PostgreSQLDialect"  
+            
+            System.out.println("BONGO URL: " + System.env.DATABASE_URL)
+            
             uri = new URI(System.env.DATABASE_URL)   
             url = "jdbc:postgresql://"+uri.host+uri.path
             username = uri.userInfo.split(":")[0]
