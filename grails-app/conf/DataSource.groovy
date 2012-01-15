@@ -35,22 +35,11 @@ environments {
         dataSource {
             dbCreate = "validate" // one of 'create', 'create-drop', 'update', 'validate', ''
             driverClassName = "org.postgresql.Driver"
-            dialect = "org.hibernate.dialect.PostgreSQLDialect"
-            
-            println System.env.DATABASE_URL
-            
-            uri = new URI(System.env.DATABASE_URL)
-    
-            //postgres://zpeakbajrn:bLSv_jzZC_00tWTLE1Qn@ec2-107-21-110-190.compute-1.amazonaws.com/zpeakbajrn
-    
-            //url = "jdbc:postgresql://ec2-107-21-110-190.compute-1.amazonaws.com/zpeakbajrn"
+            dialect = "org.hibernate.dialect.PostgreSQLDialect"           
+            uri = new URI(System.env.DATABASE_URL)   
             url = "jdbc:postgresql://"+uri.host+uri.path
             username = uri.userInfo.split(":")[0]
-            password = uri.userInfo.split(":")[1]
-            
-            println url
-            println username
-            println password
+            password = uri.userInfo.split(":")[1]            
         }
     }
 }
