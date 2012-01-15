@@ -37,7 +37,7 @@ environments {
             driverClassName = "org.postgresql.Driver"
             dialect = "org.hibernate.dialect.PostgreSQLDialect"  
             
-            System.out.println("YUNGO URL: " + System.getenv())
+            System.out.println("YUNGO URL: " + ${DATABASE_URL})
             
             System.out.println("BONGO URL: " + System.env.DATABASE_URL)
             
