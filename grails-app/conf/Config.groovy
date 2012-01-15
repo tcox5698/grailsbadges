@@ -67,7 +67,8 @@ environments {
     
     test {
         grails.plugin.databasemigration.updateOnStart = true
-        grails.plugin.databasemigration.updateOnStartFileNames = ["changelog.groovy"]             
+        grails.plugin.databasemigration.updateOnStartFileNames = ["changelog.groovy"]   
+        grails.plugin.databasemigration.dbDocController.enabled = true
     }    
     
     stage {
@@ -76,6 +77,7 @@ environments {
         
         grails.plugin.databasemigration.updateOnStart = true
         grails.plugin.databasemigration.updateOnStartFileNames = ["changelog.groovy"]             
+        grails.plugin.databasemigration.dbDocController.enabled = true        
     }
     
     production {
