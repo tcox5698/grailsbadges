@@ -13,7 +13,7 @@ hibernate {
 environments {
     development {
         dataSource {
-            dbCreate = "validate" // one of 'create', 'create-drop', 'update', 'validate', ''
+            dbCreate = "" // one of 'create', 'create-drop', 'update', 'validate', ''
             driverClassName = "org.postgresql.Driver"
             dialect = "org.hibernate.dialect.PostgreSQLDialect"
             url = "jdbc:postgresql://localhost/mbgrails_dev"
@@ -23,7 +23,7 @@ environments {
     }
     test {
         dataSource {
-            dbCreate = "validate" // one of 'create', 'create-drop', 'update', 'validate', ''
+            dbCreate = "" // one of 'create', 'create-drop', 'update', 'validate', ''
             driverClassName = "org.postgresql.Driver"
             dialect = "org.hibernate.dialect.PostgreSQLDialect"
             url = "jdbc:postgresql://localhost/mbgrails_test"
@@ -31,9 +31,21 @@ environments {
             password = "password"
         }
     }
+    
+    stage {
+        dataSource {
+            dbCreate = "" // one of 'create', 'create-drop', 'update', 'validate', ''
+            driverClassName = "org.postgresql.Driver"
+            dialect = "org.hibernate.dialect.PostgreSQLDialect"
+            url = "jdbc:postgresql://localhost/mbgrails_stage"
+            username = "postgres"
+            password = "password"
+        }
+    }    
+    
     production {
         dataSource {
-            dbCreate = "validate" // one of 'create', 'create-drop', 'update', 'validate', ''
+            dbCreate = "" // one of 'create', 'create-drop', 'update', 'validate', ''
             driverClassName = "org.postgresql.Driver"
             dialect = "org.hibernate.dialect.PostgreSQLDialect"  
                       
