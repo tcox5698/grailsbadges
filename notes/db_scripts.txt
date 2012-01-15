@@ -1,0 +1,12 @@
+these are just notes
+
+export PGPASSWORD="password"
+pg_dump -U postgres [dbname]
+
+pg_dump -U postgres -f mbstage.bak mbgrails_stage
+
+
+dropdb -U postgres mbgrails_dev
+createdb -U postgres mbgrails_dev
+
+psql -U postgres mbgrails_dev < mbstage.bak

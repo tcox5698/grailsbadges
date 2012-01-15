@@ -65,6 +65,11 @@ environments {
         grails.logging.jul.usebridge = true
     }
     
+    test {
+        grails.plugin.databasemigration.updateOnStart = true
+        grails.plugin.databasemigration.updateOnStartFileNames = ["changelog.groovy"]             
+    }    
+    
     stage {
         grails.logging.jul.usebridge = false
         // TODO: grails.serverURL = "http://www.changeme.com"
