@@ -48,8 +48,6 @@ environments {
             dbCreate = "" // one of 'create', 'create-drop', 'update', 'validate', ''
             driverClassName = "org.postgresql.Driver"
             dialect = "org.hibernate.dialect.PostgreSQLDialect"  
-            
-            println("CONFIG THIS:" + System.env)
                       
             uri = new URI("postgres://ojkbubwpyj:3Z0iu5W1uRuVvv2ltyhh@ec2-50-17-236-208.compute-1.amazonaws.com/ojkbubwpyj")   
             url = "jdbc:postgresql://"+uri.host+uri.path
