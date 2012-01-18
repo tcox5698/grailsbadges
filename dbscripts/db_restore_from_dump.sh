@@ -5,6 +5,18 @@ export CUR_DATE=`date "+%Y%m%d-%H:%M:%S"`
 export TARGET_DB="$1"
 export DUMP_FILE="$2"
 
+
+if [ "$1" == "" -o   "$1" == "-h" -o "$2" == "" ]; then
+    echo " "
+    echo " "
+    echo "Usage: ./db_restore_from_dump [target_db] [dump_file]"
+    echo "  where [target_db] is a postgres database"
+    echo "  and [dump_file] is the name of a postgres dump produced with the "
+    echo "  pg_dump command or heroku pgbackups:capture command "
+    echo " "
+    exit 0
+fi
+
 if [ -f $DBWORK_DIR/$TARGET_DB.bak ] ; then
   mv $DBWORK_DIR/$TARGET_DB.bak $DBWORK_DIR/x$TARGET_DB.bak.$CUR_DATE
 fi
