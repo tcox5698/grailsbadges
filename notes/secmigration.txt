@@ -1,0 +1,5 @@
+dbm-gorm will script new columns
+
+password won't be encrypted - fine, passwords will have to be reset
+
+so password reset is required

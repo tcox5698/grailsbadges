@@ -1,17 +1,16 @@
 package com.davai.merit
 
-class Person {
+import com.davai.secure.*
 
-    String emailAddress
+class Person extends SecUser {
+
     String name
-    String password
 
     static constraints = {
-        emailAddress(unique:true)
         name(unique:true)
     }
     
     public String toString() {
         return id + ": " + this.name
-    }
+    } 
 }

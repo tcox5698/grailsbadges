@@ -1,3 +1,4 @@
+import grails.plugins.springsecurity.SecurityConfigType
 // locations to search for config files that get merged into the main config
 // config files can either be Java properties files or ConfigSlurper scripts
 
@@ -78,7 +79,7 @@ environments {
         grails.plugin.databasemigration.updateOnStart = true
         grails.plugin.databasemigration.updateOnStartFileNames = ["changelog.groovy"]             
         grails.plugin.databasemigration.dbDocController.enabled = true        
-    }
+    }   
     
     production {
         grails.logging.jul.usebridge = false
@@ -110,3 +111,14 @@ log4j = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
+
+// Added by the Spring Security Core plugin:
+grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.davai.secure.SecUser'
+grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.davai.secure.SecUserSecRole'
+grails.plugins.springsecurity.authority.className = 'com.davai.secure.SecRole'
+
+grails.plugins.springsecurity.securityConfigType = SecurityConfigType.InterceptUrlMap
+grails.plugins.springsecurity.interceptUrlMap = [
+    //'/':             ['IS_AUTHENTICATED_ANONYMOUSLY'],
+    '/**':           ['IS_AUTHENTICATED_ANONYMOUSLY']
+]

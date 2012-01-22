@@ -30,7 +30,7 @@ environments {
             username = "postgres"
             password = "password"
         }
-    }
+    }  
     
     stage {
         dataSource {
