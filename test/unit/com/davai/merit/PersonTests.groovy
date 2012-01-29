@@ -13,30 +13,52 @@ class PersonTests {
 
     void testEmailAddressMustBeUnique() {
         def inputEmailAddress = "inputEmailAddress"
-        def existingPerson = new Person(emailAddress: inputEmailAddress,
-            password: "inputPassword", name: "inputName")
+        def existingPerson = new Person(
+            username: inputEmailAddress,
+            password: "inputPassword", 
+            name: "inputName",
+            accountLocked:"false",
+            accountExpired:"false",
+            enabled:"true")
         
         mockForConstraintsTests(Person, [existingPerson])
         
-        def newPerson = new Person(name: "newName", password: "newPassword", 
-            emailAddress:inputEmailAddress)
+        def newPerson = new Person(
+            username: inputEmailAddress,
+            password: "newPassword", 
+            name: "newName", 
+            accountLocked:"false",
+            accountExpired:"false",
+            enabled:"true"
+        )
 
         newPerson.validate()
         
         println newPerson.errors
         
-        assert "unique" == newPerson.errors["emailAddress"]
+        assert "unique" == newPerson.errors["username"]
     }
     
     void testNameMustBeUnique() {
         def inputName = "inputName"
-        def existingPerson = new Person(emailAddress: "inputEmailAddress",
-            password: "inputPassword", name: inputName)
+        def existingPerson = new Person(
+            username: "inputEmailAddress",
+            password: "inputPassword", 
+            name: inputName,
+            accountLocked:"false",
+            accountExpired:"false",
+            enabled:"true"        
+        )
         
         mockForConstraintsTests(Person, [existingPerson])
         
-        def newPerson = new Person(name: inputName, password: "newPassword", 
-            emailAddress:"newEmailAddress")
+        def newPerson = new Person(
+            username: "newEmailAddress",
+            password: "newPassword", 
+            name: inputName,
+            accountLocked:"false",
+            accountExpired:"false",
+            enabled:"true"  )
 
         newPerson.validate()
         

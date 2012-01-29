@@ -119,6 +119,7 @@ grails.plugins.springsecurity.authority.className = 'com.davai.secure.SecRole'
 
 grails.plugins.springsecurity.securityConfigType = SecurityConfigType.InterceptUrlMap
 grails.plugins.springsecurity.interceptUrlMap = [
-    //'/':             ['IS_AUTHENTICATED_ANONYMOUSLY'],
-    '/**':           ['IS_AUTHENTICATED_ANONYMOUSLY']
+    '/':             ['IS_AUTHENTICATED_ANONYMOUSLY'],
+    '/login/*':             ['IS_AUTHENTICATED_ANONYMOUSLY'],
+    '/**':           ['IS_AUTHENTICATED_FULLY']
 ]
