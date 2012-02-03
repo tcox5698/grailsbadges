@@ -69,41 +69,7 @@ environments {
         
         grails {
            mail {
-              /*host = "mock.net"
-              port = "999"
-              username = "mockemailuser"
-              password = "mockemailpassword"
-              props = [ "mail.smtp.auth":"true",
-                               "mail.smtp.socketFactory.port":"999",
-                               "mail.smtp.socketFactory.class":"com.davai.mock.MockSocketFactory",
-                               "mail.smtp.socketFactory.fallback":"false"  ]
-                               
-             "mail.smtp.starttls.enable":"true",
-             "mail.smtp.protocol": "smtps", 
-                        
-              port = 587           
-                               */
-              
-              ssl = "on"
-              host = "smtp.gmail.com"
-              port = 587
-              username = "tcox5698"
-              password = "*********"
-              props = [ "mail.smtp.auth":"true",
-                            "mail.smtp.starttls.enable":"true",                     
-                               "mail.smtp.socketFactory.port":"587"  ]
-              
-              /*ssl = "on"
-              host = "smtp.comcast.net"
-              port = 465
-              username = "tcox5698"
-              password = "**********"
-              props = [ "mail.smtp.auth":"true",
-                            "mail.smtp.starttls.enable":"true",
-                            "mail.smtp.protocol": "smtps",                               
-                               "mail.smtp.socketFactory.port":"465",
-                               "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
-                               "mail.smtp.socketFactory.fallback":"false"  ]*/
+              port = com.icegreen.greenmail.util.ServerSetupTest.SMTP.port
            }
         }
     }
@@ -111,26 +77,9 @@ environments {
     test {
         grails {
            mail {
-              host = "mock.net"
-              port = "999"
-              username = "mockemailuser"
-              password = "mockemailpassword"
-              props = [ "mail.smtp.auth":"true",
-                               "mail.smtp.socketFactory.port":"999",
-                               "mail.smtp.socketFactory.class":"com.davai.mock.MockSocketFactory",
-                               "mail.smtp.socketFactory.fallback":"false"  ]
-              
-           
-              /*host = "smtp.comcast.net"
-              port = 587
-              username = "tcox5698"
-              password = "**********"
-              props = [ "mail.smtp.auth":"true",
-                               "mail.smtp.socketFactory.port":"587",
-                               "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
-                               "mail.smtp.socketFactory.fallback":"false"  ]*/
+              port = com.icegreen.greenmail.util.ServerSetupTest.SMTP.port
            }
-        }    
+        }  
     
     
         grails.plugin.databasemigration.updateOnStart = true
@@ -188,5 +137,7 @@ grails.plugins.springsecurity.interceptUrlMap = [
     '/':             ['IS_AUTHENTICATED_ANONYMOUSLY'],
     '/login/*':      ['IS_AUTHENTICATED_ANONYMOUSLY'],
     '/register/*':   ['IS_AUTHENTICATED_ANONYMOUSLY'],
+    '/greenmail/**':  ['IS_AUTHENTICATED_ANONYMOUSLY'],
     '/**':           ['IS_AUTHENTICATED_FULLY']
+    
 ]
