@@ -93,7 +93,21 @@ environments {
         
         grails.plugin.databasemigration.updateOnStart = true
         grails.plugin.databasemigration.updateOnStartFileNames = ["changelog.groovy"]             
-        grails.plugin.databasemigration.dbDocController.enabled = true        
+        grails.plugin.databasemigration.dbDocController.enabled = true   
+        
+        grails {
+            mail {
+                ssl = "on"
+                host = "smtp.sendgrid.net"
+                port = 587
+                username = System.env.SENDGRID_USERNAME
+                password = System.env.SENDGRID_PASSWORD
+                props = [ "mail.smtp.auth":"true",
+                              "mail.smtp.starttls.enable":"true",                     
+                              "mail.smtp.socketFactory.port":"587"  ]
+            
+            }    
+        }
     }   
     
     production {
@@ -101,7 +115,21 @@ environments {
         // TODO: grails.serverURL = "http://www.changeme.com"
         
         grails.plugin.databasemigration.updateOnStart = true
-        grails.plugin.databasemigration.updateOnStartFileNames = ["changelog.groovy"]         
+        grails.plugin.databasemigration.updateOnStartFileNames = ["changelog.groovy"]  
+        
+        grails {
+            mail {
+                ssl = "on"
+                host = "smtp.sendgrid.net"
+                port = 587
+                username = System.env.SENDGRID_USERNAME
+                password = System.env.SENDGRID_PASSWORD
+                props = [ "mail.smtp.auth":"true",
+                              "mail.smtp.starttls.enable":"true",                     
+                              "mail.smtp.socketFactory.port":"587"  ]
+            
+            }    
+        }        
     }
 }
 
