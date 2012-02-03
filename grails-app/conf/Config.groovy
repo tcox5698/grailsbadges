@@ -45,6 +45,7 @@ grails.views.gsp.sitemesh.preprocess = true
 // scaffolding templates configuration
 grails.scaffolding.templates.domainSuffix = 'Instance'
 
+
 // Set to false to use the new Grails 1.2 JSONBuilder in the render method
 grails.json.legacy.builder = false
 // enabled native2ascii conversion of i18n properties files
@@ -61,12 +62,77 @@ grails.exceptionresolver.params.exclude = ['password']
 grails.hibernate.cache.queries = true
 
 // set per-environment serverURL stem for creating absolute links
+
 environments {
     development {
         grails.logging.jul.usebridge = true
+        
+        grails {
+           mail {
+              /*host = "mock.net"
+              port = "999"
+              username = "mockemailuser"
+              password = "mockemailpassword"
+              props = [ "mail.smtp.auth":"true",
+                               "mail.smtp.socketFactory.port":"999",
+                               "mail.smtp.socketFactory.class":"com.davai.mock.MockSocketFactory",
+                               "mail.smtp.socketFactory.fallback":"false"  ]
+                               
+             "mail.smtp.starttls.enable":"true",
+             "mail.smtp.protocol": "smtps", 
+                        
+              port = 587           
+                               */
+              
+              ssl = "on"
+              host = "smtp.gmail.com"
+              port = 587
+              username = "tcox5698"
+              password = "*********"
+              props = [ "mail.smtp.auth":"true",
+                            "mail.smtp.starttls.enable":"true",                     
+                               "mail.smtp.socketFactory.port":"587"  ]
+              
+              /*ssl = "on"
+              host = "smtp.comcast.net"
+              port = 465
+              username = "tcox5698"
+              password = "**********"
+              props = [ "mail.smtp.auth":"true",
+                            "mail.smtp.starttls.enable":"true",
+                            "mail.smtp.protocol": "smtps",                               
+                               "mail.smtp.socketFactory.port":"465",
+                               "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
+                               "mail.smtp.socketFactory.fallback":"false"  ]*/
+           }
+        }
     }
     
     test {
+        grails {
+           mail {
+              host = "mock.net"
+              port = "999"
+              username = "mockemailuser"
+              password = "mockemailpassword"
+              props = [ "mail.smtp.auth":"true",
+                               "mail.smtp.socketFactory.port":"999",
+                               "mail.smtp.socketFactory.class":"com.davai.mock.MockSocketFactory",
+                               "mail.smtp.socketFactory.fallback":"false"  ]
+              
+           
+              /*host = "smtp.comcast.net"
+              port = 587
+              username = "tcox5698"
+              password = "**********"
+              props = [ "mail.smtp.auth":"true",
+                               "mail.smtp.socketFactory.port":"587",
+                               "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
+                               "mail.smtp.socketFactory.fallback":"false"  ]*/
+           }
+        }    
+    
+    
         grails.plugin.databasemigration.updateOnStart = true
         grails.plugin.databasemigration.updateOnStartFileNames = ["changelog.groovy"]   
         grails.plugin.databasemigration.dbDocController.enabled = true
@@ -113,13 +179,14 @@ log4j = {
 }
 
 // Added by the Spring Security Core plugin:
-grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.davai.secure.SecUser'
+grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.davai.merit.Person'
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.davai.secure.SecUserSecRole'
 grails.plugins.springsecurity.authority.className = 'com.davai.secure.SecRole'
 
 grails.plugins.springsecurity.securityConfigType = SecurityConfigType.InterceptUrlMap
 grails.plugins.springsecurity.interceptUrlMap = [
     '/':             ['IS_AUTHENTICATED_ANONYMOUSLY'],
-    '/login/*':             ['IS_AUTHENTICATED_ANONYMOUSLY'],
+    '/login/*':      ['IS_AUTHENTICATED_ANONYMOUSLY'],
+    '/register/*':   ['IS_AUTHENTICATED_ANONYMOUSLY'],
     '/**':           ['IS_AUTHENTICATED_FULLY']
 ]

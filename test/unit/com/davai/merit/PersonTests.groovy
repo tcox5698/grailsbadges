@@ -36,7 +36,7 @@ class PersonTests {
         
         println newPerson.errors
         
-        assert "unique" == newPerson.errors["username"]
+        assert "unique" == newPerson.errors["username"]       
     }
     
     void testNameMustBeUnique() {
@@ -65,5 +65,5 @@ class PersonTests {
         println newPerson.errors
         
         assert "unique" == newPerson.errors["name"]
-    }
+    }    
 }
