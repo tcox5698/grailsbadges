@@ -95,7 +95,7 @@ environments {
         grails.plugin.databasemigration.updateOnStartFileNames = ["changelog.groovy"]             
         grails.plugin.databasemigration.dbDocController.enabled = true   
         
-        grails {
+       /* grails {
             mail {
                 ssl = "off"
                 host = "smtp.sendgrid.net"
@@ -107,7 +107,7 @@ environments {
                               "mail.smtp.socketFactory.port":"587"  ]
             
             }    
-        }
+        } */
     }   
     
     production {
@@ -117,7 +117,7 @@ environments {
         grails.plugin.databasemigration.updateOnStart = true
         grails.plugin.databasemigration.updateOnStartFileNames = ["changelog.groovy"]  
         
-        grails {
+/*        grails {
             mail {
                 ssl = "off"
                 host = "smtp.sendgrid.net"
@@ -129,7 +129,7 @@ environments {
                               "mail.smtp.socketFactory.port":"587"  ]
             
             }    
-        }        
+        } */        
     }
 }
 
