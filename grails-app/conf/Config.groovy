@@ -117,19 +117,15 @@ environments {
         grails.plugin.databasemigration.updateOnStart = true
         grails.plugin.databasemigration.updateOnStartFileNames = ["changelog.groovy"]  
         
-/*        grails {
-            mail {
-                ssl = "off"
-                host = "smtp.sendgrid.net"
-                port = 587
-                username = System.env.SENDGRID_USERNAME
-                password = System.env.SENDGRID_PASSWORD
-                props = [ "mail.smtp.auth":"true",
-                              "mail.smtp.starttls.enable":"true",                     
-                              "mail.smtp.socketFactory.port":"587"  ]
-            
-            }    
-        } */        
+        grails { 
+            mail { 
+                host = "smtp.sendgrid.net" 
+                port = 587 
+                username = System.env.SENDGRID_USERNAME 
+                password = System.env.SENDGRID_PASSWORD 
+                props = ["mail.smtp.auth":"true"] 
+            } 
+        }        
     }
 }
 
