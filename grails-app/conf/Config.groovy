@@ -97,7 +97,7 @@ environments {
         
         grails {
             mail {
-                ssl = "on"
+                ssl = "off"
                 host = "smtp.sendgrid.net"
                 port = 587
                 username = System.env.SENDGRID_USERNAME
@@ -119,7 +119,7 @@ environments {
         
         grails {
             mail {
-                ssl = "on"
+                ssl = "off"
                 host = "smtp.sendgrid.net"
                 port = 587
                 username = System.env.SENDGRID_USERNAME
