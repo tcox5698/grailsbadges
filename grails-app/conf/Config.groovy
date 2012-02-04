@@ -95,19 +95,17 @@ environments {
         grails.plugin.databasemigration.updateOnStartFileNames = ["changelog.groovy"]             
         grails.plugin.databasemigration.dbDocController.enabled = true   
         
-       /* grails {
-            mail {
-                ssl = "off"
-                host = "smtp.sendgrid.net"
-                port = 587
-                username = System.env.SENDGRID_USERNAME
-                password = System.env.SENDGRID_PASSWORD
-                props = [ "mail.smtp.auth":"true",
-                              "mail.smtp.starttls.enable":"true",                     
-                              "mail.smtp.socketFactory.port":"587"  ]
-            
-            }    
-        } */
+        grails.plugin.excludes="greenmail"        
+        
+        grails { 
+            mail { 
+                host = "smtp.sendgrid.net" 
+                port = 587 
+                username = System.env.SENDGRID_USERNAME 
+                password = System.env.SENDGRID_PASSWORD 
+                props = ["mail.smtp.auth":"true"] 
+            } 
+        }   
     }   
     
     production {
@@ -116,6 +114,8 @@ environments {
         
         grails.plugin.databasemigration.updateOnStart = true
         grails.plugin.databasemigration.updateOnStartFileNames = ["changelog.groovy"]  
+        
+        grails.plugin.excludes="greenmail"
         
         grails { 
             mail { 
@@ -162,6 +162,7 @@ grails.plugins.springsecurity.interceptUrlMap = [
     '/login/*':      ['IS_AUTHENTICATED_ANONYMOUSLY'],
     '/register/*':   ['IS_AUTHENTICATED_ANONYMOUSLY'],
     '/greenmail/**':  ['IS_AUTHENTICATED_ANONYMOUSLY'],
+    '/static/**':  ['IS_AUTHENTICATED_ANONYMOUSLY'],    
     '/**':           ['IS_AUTHENTICATED_FULLY']
     
 ]
