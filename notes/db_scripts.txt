@@ -10,3 +10,5 @@ dropdb -U postgres mbgrails_dev
 createdb -U postgres mbgrails_dev
 
 psql -U postgres mbgrails_dev < mbstage.bak
+
+touch
