@@ -1,5 +1,5 @@
 these are just notes
-
+x
 export PGPASSWORD="password"
 pg_dump -U postgres [dbname]
 
