@@ -96,17 +96,7 @@ environments {
         
         grails.plugin.databasemigration.updateOnStart = true
         grails.plugin.databasemigration.updateOnStartFileNames = ["changelog.groovy"]             
-        grails.plugin.databasemigration.dbDocController.enabled = true          
-        
-        grails { 
-            mail { 
-                host = "smtp.sendgrid.net" 
-                port = 587 
-                username = System.env.SENDGRID_USERNAME 
-                password = System.env.SENDGRID_PASSWORD 
-                props = ["mail.smtp.auth":"true"] 
-            } 
-        }   
+        grails.plugin.databasemigration.dbDocController.enabled = true            
     }   
     
     production {
