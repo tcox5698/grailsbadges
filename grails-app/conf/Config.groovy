@@ -88,14 +88,15 @@ environments {
     }    
     
     stage {
-        grails.logging.jul.usebridge = false
-        // TODO: grails.serverURL = "http://www.changeme.com"
+        grails {
+           mail {
+              port = com.icegreen.greenmail.util.ServerSetupTest.SMTP.port
+           }
+        }  
         
         grails.plugin.databasemigration.updateOnStart = true
         grails.plugin.databasemigration.updateOnStartFileNames = ["changelog.groovy"]             
-        grails.plugin.databasemigration.dbDocController.enabled = true   
-        
-        grails.plugin.excludes="greenmail"        
+        grails.plugin.databasemigration.dbDocController.enabled = true          
         
         grails { 
             mail { 
