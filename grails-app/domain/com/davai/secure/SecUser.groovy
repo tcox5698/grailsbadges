@@ -13,10 +13,10 @@ abstract class SecUser {
 
 	static constraints = {
 		username blank: false, unique: true
-		password blank: false
+		password nullable: true
 		enabled blank: false
 		accountExpired blank: false
-		accountLocked blank: false
+		accountLocked blank: false	
 	}
 
 	static mapping = {
@@ -37,7 +37,7 @@ abstract class SecUser {
 			encodePassword()
 		}
 	}
-
+	
 	protected void encodePassword() {
 		password = springSecurityService.encodePassword(password)
 	}	  

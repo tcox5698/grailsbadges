@@ -27,4 +27,10 @@ class Person extends SecUser {
         return id + ": " + this.name
     } 
     
+	public void setPassword(String inputPassword) {
+	    if (null != inputPassword && inputPassword.trim().length() > 0 
+	        && !inputPassword.equals(getPassword())) {
+                super.setPassword(inputPassword)
+	    }
+	}    
 }
