@@ -9,11 +9,14 @@ import grails.test.mixin.*
 @Mock(Person)
 class PersonControllerTests {
 
-
     def populateValidParams(params) {
       assert params != null
-      // TODO: Populate valid properties like...
-      //params["name"] = 'someValidName'
+      params["name"] = 'inputName'
+      params["username"] = 'username@username.com'
+      params["password"] = 'password' + (5 % new java.util.Date().getTime())
+      params["enabled"] = 'true'
+      params["accountExpired"] = 'false'
+      params["accountLocked"] = 'false'
     }
 
     void testIndex() {
@@ -105,11 +108,12 @@ class PersonControllerTests {
 
         // test invalid parameters in update
         params.id = person.id
-        //TODO: add invalid values to params object
+        params.username = null
 
         controller.update()
 
-        assert view == "/person/edit"
+        assertTrue("was expected some person.errors: " + person.errors, person.errors.hasErrors())
+        assertEquals("/person/edit",  view)
         assert model.personInstance != null
 
         person.clearErrors()
