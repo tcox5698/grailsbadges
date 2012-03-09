@@ -142,6 +142,8 @@ log4j = {
            'net.sf.ehcache.hibernate'
 }
 
+grails.plugins.springsecurity.useSecurityEventListener = true
+
 // Added by the Spring Security Core plugin:
 grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.davai.merit.Person'
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.davai.secure.SecUserSecRole'

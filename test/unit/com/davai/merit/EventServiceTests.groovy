@@ -22,6 +22,7 @@ class EventServiceTests extends junit.framework.TestCase {
 		def mockController = mockFor(EventHandler.class)
 		mockController.demand.handleEvent { event -> 
 			System.out.println("handler called!")
+			System.out.println("event class: " + event.getClass())
 			if (!event.personId.equals(inputPersonId)) {
 				throw new RuntimeException("barfola")
 			}
@@ -36,6 +37,7 @@ class EventServiceTests extends junit.framework.TestCase {
 		service.processEvent(loginEvent)
 		
 		//VERIFY
+		mockController.verify()
 		boolean wasHandled = handled["wasHandled"]
 		assertTrue(wasHandled)
     }
