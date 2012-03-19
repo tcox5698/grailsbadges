@@ -10,7 +10,9 @@ class ObjectService {
 	}
 	
 	public List find(Criteria criteria) {
-		return null
+		return sessionFactory.getCurrentSession().createQuery(
+			criteria.buildQueryString()
+		).list()
 	}
 	
 	public void save(Object object) {

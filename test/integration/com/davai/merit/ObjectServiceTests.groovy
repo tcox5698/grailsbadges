@@ -1,11 +1,11 @@
 package com.davai.merit
 
-
+import com.davai.merit.criteria.*
 
 class ObjectServiceTests extends GroovyTestCase {
 	def objectService
 	
-	void testSomething() {
+	void testCreateReadFind() {
         def inputEmailAddress = "inputEmailAddress"
         
         def existingPerson = new Person(
@@ -19,9 +19,17 @@ class ObjectServiceTests extends GroovyTestCase {
         assert existingPerson.save(flush:true)
         
 		//EXECUTE
-		def foundPerson = objectService.read(Person.class, existingPerson.getId())
+		def readPerson = objectService.read(Person.class, existingPerson.getId())
 		
 		//VERIFY
-		assert existingPerson.equals(foundPerson)
+		assert existingPerson.equals(readPerson)
+		
+		def criteria = new PersonCriteria(name: readPerson.name)
+		
+		def foundPeople = objectService.find(criteria)
+		
+		assertEquals(1, foundPeople.size)
+		
+		assertEquals(existingPerson.name, foundPeople[0].name)
 	}
 }

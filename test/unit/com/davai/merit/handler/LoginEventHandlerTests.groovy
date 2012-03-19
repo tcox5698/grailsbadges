@@ -8,19 +8,19 @@ import groovy.mock.interceptor.*
 
 class LoginEventHandlerTests extends GroovyTestCase {
 	void testHandleEvent_SavesNewLoginStatistic() {
-		def inputPersonId = "inputPersonId"
+		def inputPersonId = 7
 		def LoginEventHandler handler = new LoginEventHandler()
 		def loginEvent = new LoginEvent(personId:inputPersonId)
 		
 		def objectServiceController = new MockFor(ObjectService)
 				 
-		objectServiceController.demand.findThem { countCriteria ->
+		objectServiceController.demand.find(1) { countCriteria ->
 			assertEquals(inputPersonId, countCriteria.personId)
 			return []
 		}
 				
 		objectServiceController.demand.save { loginCount ->
-			assertEquals(1, loginCount.value, 0.01)	
+			assertEquals(1, loginCount.countValue)	
 			assertEquals(inputPersonId, loginCount.personId)			
 		}
 		

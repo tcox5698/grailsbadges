@@ -12,13 +12,9 @@ class LoginEventHandler implements EventHandler {
 		
 		def LoginCountCriteria criteria = new LoginCountCriteria(personId: personId)
 		
-		def loginCounts = objectService.findThem(criteria)
+		def loginCounts = objectService.find(criteria)
 
-		System.out.println("loginEventHandler personId: " + personId.class)
-			
-		def LoginCount count = new LoginCount(personId: personId, value:1)
-		
-		System.out.println("loginEventHandler count: " + count)
+		def LoginCount count = new LoginCount(personId: personId, countValue:1)		
 		
 		objectService.save(count)		
 	}
