@@ -10,9 +10,21 @@ class ObjectService {
 	}
 	
 	public List find(Criteria criteria) {
-		return sessionFactory.getCurrentSession().createQuery(
-			criteria.buildQueryString()
-		).list()
+		def davaiQuery = criteria.buildQuery()
+		def queryString = davaiQuery.buildQueryString()
+		log.error "queryString:" + queryString
+	
+		def query = sessionFactory.getCurrentSession().createQuery(
+			queryString
+		)
+		
+		for (param in davaiQuery.parameters) {
+			log.error "param value class: " + param.value.getClass().getName()
+		
+			query.setParameter(param.key, param.value)
+		}
+		
+		query.list()
 	}
 	
 	public void save(Object object) {

@@ -23,9 +23,9 @@ class Person extends SecUser {
 		email = username;
 	}    
     
-    public String toString() {
-        return id + ": " + this.name
-    } 
+	public String toString() {
+		return id + ": " + this.name
+	} 
     
 	public void setPassword(String inputPassword) {
 	    if (null != inputPassword && inputPassword.trim().length() > 0 

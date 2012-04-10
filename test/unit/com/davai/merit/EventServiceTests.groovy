@@ -14,16 +14,16 @@ import groovy.mock.interceptor.MockFor
 class EventServiceTests extends junit.framework.TestCase {
 
     void testSomething() {
-    	def inputPersonId = "inputPersonId"
+    	def inputUsername = "inputUsername"
     	def handled = [:]
     
-	    LoginEvent loginEvent = new LoginEvent(personId: inputPersonId)
+	    LoginEvent loginEvent = new LoginEvent(username: inputUsername)
 	    
 		def mockController = mockFor(EventHandler.class)
 		mockController.demand.handleEvent { event -> 
 			System.out.println("handler called!")
 			System.out.println("event class: " + event.getClass())
-			if (!event.personId.equals(inputPersonId)) {
+			if (!event.username.equals(inputUsername)) {
 				throw new RuntimeException("barfola")
 			}
 			handled["wasHandled"] = true
