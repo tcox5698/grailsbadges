@@ -14,9 +14,8 @@ class EventService {
     def processEvent(Event event) {
 		def handlerName = handlerRegistry[event.getClass().name]
 		
-		log.error("handlerName: " + handlerName)
-		
-		def GenericApplicationContext ctx = WebApplicationContextUtils.getWebApplicationContext(ServletContextHolder.getServletContext()); 	
+		GenericApplicationContext ctx = WebApplicationContextUtils.getWebApplicationContext(ServletContextHolder.getServletContext())
+			
 	    def EventHandler handler = ctx.getBean(handlerName)    
 		handler.handleEvent(event)
     }

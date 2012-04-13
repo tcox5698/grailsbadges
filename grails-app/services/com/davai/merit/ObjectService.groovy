@@ -12,14 +12,14 @@ class ObjectService {
 	public List find(Criteria criteria) {
 		def davaiQuery = criteria.buildQuery()
 		def queryString = davaiQuery.buildQueryString()
-		log.error "queryString:" + queryString
+		log.info "queryString:" + queryString
 	
 		def query = sessionFactory.getCurrentSession().createQuery(
 			queryString
 		)
 		
 		for (param in davaiQuery.parameters) {
-			log.error "param value class: " + param.value.getClass().getName()
+			log.info "param value class: " + param.value.getClass().getName()
 		
 			query.setParameter(param.key, param.value)
 		}

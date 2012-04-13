@@ -28,7 +28,7 @@ class LoginEventHandlerServiceTests extends GroovyTestCase {
 	def testHandleEvent_SavesNewLoginStatistic() {
 		objectServiceController.demand.find(1) { personCriteria ->
 			assertEquals(inputUsername, personCriteria.username)
-			return expectedPerson
+			return [expectedPerson]
 		}
 					 
 		objectServiceController.demand.find(1) { countCriteria ->
@@ -52,7 +52,7 @@ class LoginEventHandlerServiceTests extends GroovyTestCase {
 	def testHandleEvent_UpdatesLoginStatistic() {
 		objectServiceController.demand.find(1) { personCriteria ->
 			assertEquals(inputUsername, personCriteria.username)
-			return expectedPerson
+			return [expectedPerson]
 		}	
 	
 		def expectedLoginCount = new LoginCount(personId: "existingLoginCount",
@@ -60,7 +60,7 @@ class LoginEventHandlerServiceTests extends GroovyTestCase {
 	
 		objectServiceController.demand.find(1) { countCriteria ->
 			assertEquals(expectedPerson.id, countCriteria.personId)
-			return expectedLoginCount
+			return [expectedLoginCount]
 		}
 		
 		objectServiceController.demand.save(1) { loginCount ->
