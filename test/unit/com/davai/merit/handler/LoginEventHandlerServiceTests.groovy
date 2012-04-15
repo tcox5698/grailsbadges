@@ -5,14 +5,14 @@ import com.davai.merit.*
 import com.davai.merit.criteria.*
 
 import groovy.mock.interceptor.*
+import grails.test.GrailsUnitTestCase
 
-class LoginEventHandlerServiceTests extends GroovyTestCase {
+class LoginEventHandlerServiceTests extends GrailsUnitTestCase {
 	def inputUsername = "inputUsername"
 	def handler = new LoginEventHandlerService()
 	def loginEvent = new LoginEvent(username:inputUsername)	
 	def objectServiceController = new MockFor(ObjectService)
 	def existingCountValue = 7
-	def expectedPersonId = 12345
 
 	def expectedPerson = new Person(
             username: inputUsername,
@@ -20,19 +20,20 @@ class LoginEventHandlerServiceTests extends GroovyTestCase {
             name: "expectedName",
             accountLocked:"false",
             accountExpired:"false",
-            enabled:"true",
-            id: expectedPersonId
-            
+            enabled:"true"
     )
 
+
 	def testHandleEvent_SavesNewLoginStatistic() {
+	    mockDomain(Person,[expectedPerson])
+	
 		objectServiceController.demand.find(1) { personCriteria ->
 			assertEquals(inputUsername, personCriteria.username)
 			return [expectedPerson]
 		}
 					 
 		objectServiceController.demand.find(1) { countCriteria ->
-			assertEquals(expectedPersonId, countCriteria.personId)
+			assertEquals(expectedPerson.id, countCriteria.personId)
 			return []
 		}
 				
