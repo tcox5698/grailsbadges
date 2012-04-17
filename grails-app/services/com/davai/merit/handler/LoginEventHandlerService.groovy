@@ -12,15 +12,15 @@ class LoginEventHandlerService implements EventHandler {
 		def person = objectService.find(personCriteria)
 		def personId = person.id[0]
 		
-		log.error "handleEvent: person: " + person
+		log.info "handleEvent: person: " + person
 		
-		log.error "handleEvent: personId: " + personId
+		log.info "handleEvent: personId: " + personId
 		
 		def LoginCountCriteria criteria = new LoginCountCriteria("personId": personId)
 		def loginCounts = objectService.find(criteria)
 		def count 
 		
-		log.error "handleEvent: find results: " + loginCounts.size()	
+		log.info "handleEvent: find results: " + loginCounts.size()	
 		
 		if (loginCounts.size() > 0) {
 			log.info "handleEvent: found loginCount: " + loginCounts
