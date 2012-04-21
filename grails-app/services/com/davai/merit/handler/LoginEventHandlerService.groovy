@@ -10,29 +10,37 @@ class LoginEventHandlerService implements EventHandler {
 	void handleEvent(Event event) {
 		def personCriteria = new PersonCriteria(username: event.username)
 		def person = objectService.find(personCriteria)
-		def personId = person.id[0]
-		
-		log.info "handleEvent: person: " + person
-		
-		log.info "handleEvent: personId: " + personId
+		person = person[0]
+		def personId = person.id
 		
 		def LoginCountCriteria criteria = new LoginCountCriteria("personId": personId)
 		def loginCounts = objectService.find(criteria)
 		def count 
-		
-		log.info "handleEvent: find results: " + loginCounts.size()	
-		
+			
 		if (loginCounts.size() > 0) {
-			log.info "handleEvent: found loginCount: " + loginCounts
 			count = loginCounts[0]
 			count.countValue++
 		} else {
 			count = new LoginCount(personId: personId, countValue:1)		
-			log.info "handleEvent: created new loginCount: " + count			
 		}
+				
+		objectService.save(count)	
 		
-		log.info "handleEvent: saving loginCount: " + count		
-		
-		objectService.save(count)		
+		if (isFibonacci(count.countValue)) {
+			def unlockedAchievement = new UnlockedAchievement(
+				person: person,
+				messageKey: "achievement.msg.login.singular",
+				messageArguments: count.countValue)
+				
+			objectService.save(unlockedAchievement)		
+		}			
+	}
+	
+	def isFibonacci(number, candidate0=0, candidate1=1) {
+		if (candidate0 > number) {		
+			return false
+		}
+			
+		return candidate0 == number || candidate1 == number || isFibonacci(number, candidate1, candidate0 + candidate1)
 	}
 }

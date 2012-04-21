@@ -19,13 +19,13 @@ class PersonDbTests {
     @Test
     void testSomething() {
         def inputEmailAddress = "inputEmailAddress"
-        def existingPerson = new Person(
-            username: inputEmailAddress,
-            password: "inputPassword", 
-            name: "inputName",
-            accountLocked:"false",
-            accountExpired:"false",
-            enabled:"true")
+		def existingPerson = new Person(
+			username: inputEmailAddress,
+			password: "inputPassword", 
+			name: "inputName",
+			accountLocked:"false",
+			accountExpired:"false",
+			enabled:"true")
             
         existingPerson.save()
         
