@@ -30,7 +30,9 @@ class LoginEventHandlerService implements EventHandler {
 			def unlockedAchievement = new UnlockedAchievement(
 				person: person,
 				messageKey: "achievement.msg.login.singular",
-				messageArguments: count.countValue)
+				messageArguments: count.countValue,
+				unlockedDate: new Date()
+			)
 				
 			objectService.save(unlockedAchievement)		
 		}			

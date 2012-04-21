@@ -23,7 +23,8 @@ class UnlockedAchievementDbTests {
     	def unlockedAchievement = new UnlockedAchievement(
     		person: person,
     		messageKey: "test.messageKey",
-    		messageArguments: "arg1, arg2"
+    		messageArguments: "arg1, arg2",
+    		unlockedDate: new Date()
     	)
     	
     	unlockedAchievement.save(flush:true)

@@ -12,7 +12,7 @@ import grails.plugins.springsecurity.SecurityConfigType
 // }
 
 
-grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
+grails.project.groupId = "com.davai.merit" // change this to alter the default package name and Maven publishing destination
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
 grails.mime.use.accept.header = false
 grails.mime.types = [ html: ['text/html','application/xhtml+xml'],
@@ -153,6 +153,7 @@ grails.plugins.springsecurity.authority.className = 'com.davai.secure.SecRole'
 grails.plugins.springsecurity.securityConfigType = SecurityConfigType.InterceptUrlMap
 grails.plugins.springsecurity.interceptUrlMap = [
     '/':             ['IS_AUTHENTICATED_ANONYMOUSLY'],
+    '/mockups/*':             ['IS_AUTHENTICATED_ANONYMOUSLY'],    
     '/login/*':      ['IS_AUTHENTICATED_ANONYMOUSLY'],
     '/register/*':   ['IS_AUTHENTICATED_ANONYMOUSLY'],
     '/greenmail/**': ['IS_AUTHENTICATED_ANONYMOUSLY'],

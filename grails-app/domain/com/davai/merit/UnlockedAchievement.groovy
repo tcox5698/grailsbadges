@@ -4,12 +4,13 @@ class UnlockedAchievement {
     Person person
     String messageKey
     String messageArguments
+    Date unlockedDate
     
-    public UnlockedAchievement(Person person, String messageKey, String messageArguments) {
+    public UnlockedAchievement(Person person, String messageKey, String messageArguments, Date unlockedDate) {
     	person = person
     	messageKey = messageKey
     	messageArguments = messageArguments
-    	log.error this.toString()
+    	unlockedDate = unlockedDate
     }
    
     public String toString() {

@@ -4,6 +4,7 @@ grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
 grails.project.target.level = 1.6
 grails.project.source.level = 1.6
+grails.project.groupId = "com.davai.merit"
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
 
 grails.project.dependency.resolution = {
@@ -44,6 +45,7 @@ grails.project.dependency.resolution = {
     
         runtime ":hibernate:$grailsVersion"
         runtime ":resources:1.1.5"
+        runtime ":twitter-bootstrap:2.0.2.25"
 
         build ":tomcat:$grailsVersion"
     }

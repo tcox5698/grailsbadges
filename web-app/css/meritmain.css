@@ -1,0 +1,32 @@
+footer.container.navbar-fixed-top {
+		top: auto;
+		bottom: 0;
+}    
+
+.meritBadge {
+		width: 100px;
+		height: 100px;
+		background-repeat: no-repeat;
+		background-position: center center;
+		text-align: center;
+		/*border-width: 1px;
+		border-color: black;
+		border-style: solid;*/				
+		margin: 5px;
+		float:left;
+}			
+
+.meritBadge img {
+		width: 75px;
+		height: 100px;
+		margin-top: 15%;
+}
+
+.meritBadgeTitle {
+		margin-top: 5%;
+		font-weight: bold;
+}
+
+.meritBadgeDate {
+		font-size: 8pt;
+}	
