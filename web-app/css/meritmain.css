@@ -12,13 +12,13 @@ footer.container.navbar-fixed-top {
 		/*border-width: 1px;
 		border-color: black;
 		border-style: solid;*/				
-		margin: 5px;
+		margin: 50px;
 		float:left;
 }			
 
 .meritBadge img {
 		width: 75px;
-		height: 100px;
+		height: 75px;
 		margin-top: 15%;
 }
 

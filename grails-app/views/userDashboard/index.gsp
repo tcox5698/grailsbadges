@@ -9,7 +9,7 @@
 
     <% unlockedAchievements.each { achievement -> %>
     <div class="meritBadge">
-            <img src="images/award-ribbon-badge-shaded.jpg" title="Award images © Sunil281 www.stockfreeimages.com www.dreamstime.com"/>
+            <img src="images/award-ribbon-badge-shaded.png"/>
             <div class="meritBadgeTitle"><g:message code="${achievement.messageKey}" 
             	args="${[achievement.messageArguments]}"/></div>
             <div class="meritBadgeDate"><g:formatDate date="${achievement.unlockedDate}" type="datetime" style="SHORT"/></div>

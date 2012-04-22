@@ -52,7 +52,7 @@
       
 		<footer class="container navbar navbar-fixed-top">
         <hr>
-		<p>&copy; Davai 2012 | Award images &copy; Sunil281 | <a href="http://www.stockfreeimages.com/">Stock Free Images</a> & <a href="http://www.dreamstime.com/">Dreamstime Stock Photos</a>
+		<p>&copy; Davai 2012 
 		</p>
 		</footer>		
 		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
