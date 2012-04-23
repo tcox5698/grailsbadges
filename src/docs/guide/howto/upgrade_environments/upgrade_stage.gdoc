@@ -1,0 +1,7 @@
+
+h1. Upgrade stage
+# Make sure stage matches production: 
+{code}heroku_txf.sh meritprod meritstage{code}
+# Make sure you're on master
+# Execute: git push herokustage master
+# Test it!

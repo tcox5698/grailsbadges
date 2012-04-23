@@ -28,7 +28,10 @@ class PersonCriteriaTests extends GroovyTestCase {
         assert existingPerson.save(flush:true)
         assert otherPerson.save(flush:true)
         
-        def personCriteria = new PersonCriteria(username: existingPerson.username)
+        def personCriteria = new PersonCriteria(
+        	queryString: "from Person p where p.username = :username ",
+        	arguments:[username: existingPerson.username]
+        )
         
 		//EXECUTE
 		def persons = objectService.find(personCriteria)

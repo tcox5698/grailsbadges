@@ -20,10 +20,6 @@ class RegisterControllerTests extends grails.test.ControllerUnitTestCase{
 
     @Test
     void testSomething() {
-        log.info 'TESTING SOMETHING!'
-        
-        log.info inputUsername
-       
         def person = new Person([
             username:inputUsername,
             password:"password",

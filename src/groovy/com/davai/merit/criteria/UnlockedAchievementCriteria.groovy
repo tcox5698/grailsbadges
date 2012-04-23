@@ -1,15 +1,15 @@
 package com.davai.merit.criteria
 
+import com.davai.merit.*
+
 public class UnlockedAchievementCriteria extends Criteria {
-	def person
 	
-	public DQuery buildQuery() {
-		def query = new DQuery(fromClause: " from UnlockedAchievement a ")
-		
-		if (person) {
-			query.addWhereParameter("person", person)
-		}
-		
-		return query	
+	def doFindAll() {		
+		return UnlockedAchievement.findAll([max:maxResults])
 	}
+	
+	def doFindAll(queryString, arguments) {
+		log.trace "finding: " + ["queryString":queryString,"arguments":arguments,"maxResults":maxResults]
+		return UnlockedAchievement.findAll(queryString, arguments, [max:maxResults])
+	}	
 }

@@ -1,16 +1,15 @@
 package com.davai.merit.criteria
 
+import com.davai.merit.*
+
 public class LoginCountCriteria extends Criteria {
-	Integer personId
+
+	def doFindAll() {
+		return LoginCount.findAll()
+	}
 	
-	def buildQuery() {
-		def query = new DQuery(fromClause: " from LoginCount c  ")
-		
-		if (personId) {
-			query.addWhereParameter("personId", personId)
-		}
-		
-		return query			
-		
+	def doFindAll(queryString, arguments) {
+		log.trace "finding: " + ["queryString":queryString,"arguments":arguments]
+		return LoginCount.findAll(queryString, arguments)
 	}
 }

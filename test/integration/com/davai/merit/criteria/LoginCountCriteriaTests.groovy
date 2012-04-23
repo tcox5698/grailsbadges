@@ -18,12 +18,19 @@ class LoginCountCriteriaTests extends GroovyTestCase {
             
         assert existingPerson.save(flush:true)
         
-        def existingLoginCount = new LoginCount(personId: existingPerson.getId(),
-        	countValue: new BigDecimal("23"))
+        def existingLoginCount = new LoginCount(
+        	person: existingPerson,
+        	countValue: new BigDecimal("23")
+        )
         
         assert existingLoginCount.save(flush:true)
         
-        def countCriteria = new LoginCountCriteria(personId: existingPerson.getId())
+        def arguments = [person:existingPerson] 
+        
+        def countCriteria = new LoginCountCriteria(
+        	queryString: " from LoginCount c where c.person = :person",
+        	arguments: arguments
+        )
         
 		//EXECUTE
 		def readLoginCounts = objectService.find(countCriteria)

@@ -27,18 +27,18 @@ class LoginEventHandlerServiceTests extends GrailsUnitTestCase {
 	    mockDomain(Person,[expectedPerson])
 	
 		objectServiceController.demand.find(1) { personCriteria ->
-			assertEquals(inputUsername, personCriteria.username)
+			assertEquals(inputUsername, personCriteria.arguments.username)
 			return [expectedPerson]
 		}
 					 
 		objectServiceController.demand.find(1) { countCriteria ->
-			assertEquals(expectedPerson.id, countCriteria.personId)
+			assertEquals(expectedPerson, countCriteria.arguments.person)
 			return []
 		}
 				
 		objectServiceController.demand.save(1) { loginCount ->
 			assertEquals(1, loginCount.countValue)	
-			assertEquals(expectedPerson.id, loginCount.personId)			
+			assertEquals(expectedPerson, loginCount.person)			
 		}
 		
 		objectServiceController.demand.save(1) { unlockedAchievement ->
@@ -57,21 +57,21 @@ class LoginEventHandlerServiceTests extends GrailsUnitTestCase {
 	
 	def testHandleEvent_UpdatesLoginStatistic_IfNonFibonacci_ThenNoAchievement() {
 		objectServiceController.demand.find(1) { personCriteria ->
-			assertEquals(inputUsername, personCriteria.username)
+			assertEquals(inputUsername, personCriteria.arguments.username)
 			return [expectedPerson]
 		}	
 	
-		def expectedLoginCount = new LoginCount(personId: "existingLoginCount",
+		def expectedLoginCount = new LoginCount(person: expectedPerson,
 			countValue: existingCountValue)
 	
 		objectServiceController.demand.find(1) { countCriteria ->
-			assertEquals(expectedPerson.id, countCriteria.personId)
+			assertEquals(expectedPerson, countCriteria.arguments.person)
 			return [expectedLoginCount]
 		}
 		
 		objectServiceController.demand.save(1) { loginCount ->
 			assertEquals(existingCountValue + 1, loginCount.countValue)	
-			assertEquals(expectedLoginCount.personId, loginCount.personId)		
+			assertEquals(expectedLoginCount.person, loginCount.person)		
 		}
 		
 		objectServiceController.use {

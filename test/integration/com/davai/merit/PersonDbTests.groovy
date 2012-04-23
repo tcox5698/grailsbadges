@@ -32,13 +32,9 @@ class PersonDbTests {
         assertFalse("should be no errors: " + existingPerson.errors, existingPerson.errors.hasErrors())
         
         assertEquals "inputName", existingPerson.name  
-        
-        System.out.println("existingPerson: " + existingPerson.username)
-        
+               
         def p = Person.read(existingPerson.id)
-        
-        System.out.println("foundPerson by read: " + p.username)    
-                
+                        
         p = SecUser.findByUsername(inputEmailAddress)
         
         assertEquals "inputName", p.name

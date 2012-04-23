@@ -24,7 +24,8 @@ class UserDashboardControllerTests {
     	controller.springSecurityService = [currentUser:expectedPerson]
     	
     	objectServiceController.demand.find(1) { unlockedAchievementCriteria ->
-    		assertEquals(expectedPerson, unlockedAchievementCriteria.person)
+    		assertEquals(expectedPerson, unlockedAchievementCriteria.arguments.person)
+    		assertEquals(5, unlockedAchievementCriteria.maxResults)
     		return [expectedUnlockedAchievement]
     	}
     	

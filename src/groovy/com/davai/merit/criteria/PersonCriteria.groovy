@@ -1,20 +1,15 @@
 package com.davai.merit.criteria
 
+import com.davai.merit.*
+
 public class PersonCriteria extends Criteria {
-	def name
-	def username
 	
-	public DQuery buildQuery() {
-		def query = new DQuery(fromClause: " from Person p ")
-		
-		if (name) {
-			query.addWhereParameter("name", name)
-		}
-		
-		if (username) {
-			query.addWhereParameter("username", username)
-		}	
-		
-		return query	
+	def doFindAll() {		
+		return Person.findAll()
+	}
+	
+	def doFindAll(queryString, arguments) {
+		log.trace "finding: " + ["queryString":queryString,"arguments":arguments]
+		return Person.findAll(queryString, arguments)
 	}
 }

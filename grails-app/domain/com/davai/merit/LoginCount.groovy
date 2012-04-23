@@ -1,10 +1,10 @@
 package com.davai.merit
 
 class LoginCount {
-	Integer personId
 	Integer countValue
+	Person person
 	
 	public String toString() {
-        return id + ": " + this.personId + ": " + countValue
+        return id + ":[" + this.person + "]: " + countValue
     } 
 }

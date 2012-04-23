@@ -1,0 +1,9 @@
+h1. Upgrade production
+# Upgrade Staging first and test
+# Make sure you're on master
+# Execute:  git push herokuprod master
+# For forward development:
+## download a new backup to local machine: 
+{code}heroku_backup.sh meritprod{code}
+## pull the dump into your stage, test and dev environments: 
+{code}db_restore_from_dump.sh mbgrails_stage meritprod.dump{code}

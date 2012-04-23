@@ -7,26 +7,56 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<title><g:layoutTitle default="Grails"/></title>
+		<title><g:layoutTitle default="Merit Badges"/></title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="shortcut icon" href="${resource(dir: 'images', file: 'star-medal-gold-orange.png')}" type="image/x-icon">
-		<link rel="apple-touch-icon" href="${resource(dir: 'images', file: 'apple-touch-icon.png')}">
-		<link rel="apple-touch-icon" sizes="114x114" href="${resource(dir: 'images', file: 'apple-touch-icon-retina.png')}">
-		<link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
-		<link rel="stylesheet" href="${resource(dir: 'css', file: 'mobile.css')}" type="text/css">
-
-		<g:layoutHead/>
+		<link rel="stylesheet" href="${resource(dir: 'css', file: 'meritmain.css')}" type="text/css">
+        <r:require modules="bootstrap"/>
+ 		<g:layoutHead/>
         <g:javascript library="jquery" plugin="jquery"/>		
 		
         <r:layoutResources />
 	</head>
 	<body>
-		<div id="grailsLogo" role="banner"><a href="http://grails.org">
-		    <img src="${resource(dir: 'images', file: 'grails_logo.png')}" alt="Grails"/></a>
-		    <sec:username /><a href="${request.contextPath}/j_spring_security_logout">sign out</a>
+		    
+
+		 
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="${createLink(uri:'/')}">Merit Badges</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li><a href="${createLink(uri:'/')}">Home</a></li>
+			  <li><a href="${createLink(uri:'/userDashboard')}">Dashboard</a></li>              
+              <li><a href="${createLink(uri:'/admin-index')}">Admin</a></li>
+              <sec:ifLoggedIn>
+			  <li><a href="#user"><i class="icon-user icon-white"></i><sec:username /></a></li>
+			  <!--<li><a href="#achievements"><span class="badge badge-success">2</span></a></li>-->
+			  <li><a href="${request.contextPath}/j_spring_security_logout">sign out</a></li>
+			  
+			  </sec:ifLoggedIn>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>		
+		
+		<div class="container">	
+			<br/>
+			<g:layoutBody/>
 		</div>
-		<g:layoutBody/>
-		<div class="footer" role="contentinfo"></div>
+      
+		<footer class="container navbar navbar-fixed-top">
+        <hr>
+		<p>&copy; Davai Midwest 2012 
+		</p>
+		</footer>		
 		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
 		<g:javascript library="application"/>
         <r:layoutResources />

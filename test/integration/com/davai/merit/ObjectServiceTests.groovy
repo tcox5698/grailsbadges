@@ -24,7 +24,10 @@ class ObjectServiceTests extends GroovyTestCase {
 		//VERIFY
 		assert existingPerson.equals(readPerson)
 		
-		def criteria = new PersonCriteria(name: readPerson.name)
+		def criteria = new PersonCriteria(
+			queryString: " from Person p where p.name = :name", 
+			arguments:[name: readPerson.name]
+		)
 		
 		def foundPeople = objectService.find(criteria)
 		

@@ -14,6 +14,6 @@ class UnlockedAchievement {
     }
    
     public String toString() {
-        return [person, messageKey, messageArguments].join(":") 
+        return [id, person, messageKey, messageArguments].join(":") 
     }
 }

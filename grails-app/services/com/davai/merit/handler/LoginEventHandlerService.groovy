@@ -8,12 +8,17 @@ class LoginEventHandlerService implements EventHandler {
 	def objectService
 
 	void handleEvent(Event event) {
-		def personCriteria = new PersonCriteria(username: event.username)
+		def personCriteria = new PersonCriteria(
+			queryString: " from Person p where p.username = :username",
+			arguments:[username: event.username]
+		)
 		def person = objectService.find(personCriteria)
 		person = person[0]
-		def personId = person.id
 		
-		def LoginCountCriteria criteria = new LoginCountCriteria("personId": personId)
+		def LoginCountCriteria criteria = new LoginCountCriteria(
+			queryString: " from LoginCount c where c.person = :person ",
+			arguments: [person:person]
+		)
 		def loginCounts = objectService.find(criteria)
 		def count 
 			
@@ -21,7 +26,7 @@ class LoginEventHandlerService implements EventHandler {
 			count = loginCounts[0]
 			count.countValue++
 		} else {
-			count = new LoginCount(personId: personId, countValue:1)		
+			count = new LoginCount(person: person, countValue:1)		
 		}
 				
 		objectService.save(count)	

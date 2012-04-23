@@ -1,0 +1,7 @@
+howto:
+  title: How To
+  upgrade_environments: 
+    title: How To Upgrade Environments
+    upgrade_production: Upgrade Production
+    upgrade_stage: Upgrade Stage
+  miscellaneous: Miscellaneous How To
