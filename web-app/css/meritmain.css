@@ -36,3 +36,11 @@ footer.container.navbar-fixed-top {
 	width: 170px;
 	height: 110px;
 }
+
+.landscape-img {
+	background-image:url('../images/sunburst1.jpg');
+	background-size:1600px;
+	background-repeat:no-repeat;
+	background-position:41% 54%;
+
+}

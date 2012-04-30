@@ -7,15 +7,15 @@
 <body>
 
       <!-- Main hero unit for a primary marketing message or call to action -->
-      <div class="hero-unit">
+      <div class="hero-unit landscape-img">
         <h1>Merit Badges</h1>
-        <p>What can I do?  What have I done?  Track your skills with Merit Badges.</p>
+        <h4>What can I do?  What have I done?  Track your skills with Merit Badges.</h4>
         <p><div class="progress progress-warning progress-striped active">
-		  			<div class="bar" style="width: 11%;">Alpha!</div>
+		  			<div class="bar" style="width: 20%;">Alpha!</div>
 				</div></p>
         <!--<p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>-->
       </div>
-
+ 
       <!-- Example row of columns -->
       <div class="row">
         <div class="span4">

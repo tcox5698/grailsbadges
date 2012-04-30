@@ -12,7 +12,7 @@ import org.codehaus.groovy.grails.plugins.springsecurity.ui.RegistrationCode
 /**
  * @author <a href='mailto:burt@burtbeckwith.com'>Burt Beckwith</a>
  */
-class RegisterController extends grails.plugins.springsecurity.ui.AbstractS2UiController {
+class RegisterController extends com.davai.merit.AbstractS2UiController {
 
 	static defaultAction = 'index'
 

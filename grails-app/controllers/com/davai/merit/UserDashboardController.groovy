@@ -1,10 +1,12 @@
 package com.davai.merit
 
 import com.davai.merit.criteria.*
+import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 
 class UserDashboardController {
 	def objectService
 	def springSecurityService
+	def grailsApplication
 
     def index() { 
     	def person = springSecurityService.currentUser

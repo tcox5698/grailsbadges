@@ -33,8 +33,10 @@
           <div class="nav-collapse">
             <ul class="nav">
               <li><a href="${createLink(uri:'/')}">Home</a></li>
-			  <li><a href="${createLink(uri:'/userDashboard')}">Dashboard</a></li>              
+			  <li><a href="${createLink(uri:'/userDashboard')}">Dashboard</a></li>
+			  <sec:access url='/admin-index'>              
               <li><a href="${createLink(uri:'/admin-index')}">Admin</a></li>
+              </sec:access>
               <sec:ifLoggedIn>
 			  <li><a href="#user"><i class="icon-user icon-white"></i><sec:username /></a></li>
 			  <!--<li><a href="#achievements"><span class="badge badge-success">2</span></a></li>-->
