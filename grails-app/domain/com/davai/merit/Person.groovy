@@ -2,7 +2,7 @@ package com.davai.merit
 
 import com.davai.secure.*
 
-class Person extends SecUser {
+class Person extends SecUser implements Serializable {
 
     String name
     
@@ -24,7 +24,7 @@ class Person extends SecUser {
 	}    
     
 	public String toString() {
-		return id + ": " + this.name
+		return "Person: [" + id + ": " + this.name + "]"
 	} 
     
 	public void setPassword(String inputPassword) {

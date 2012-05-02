@@ -1,0 +1,9 @@
+h1. Valuing stories
+
+Use a fibonacci sequence to value the stories.
+
+# 1 point = low or questionable final value to users or stakeholders
+# 2 points = some value - perhaps convenience, but not critical
+# 3 points = high value, but not central nor a blocker
+# 5 points = high value in and of itself OR is blocking another valuable feature
+# 8 points = very high value in user satisfaction or revenue generation, other features should only # be pursued if they make this feature possible

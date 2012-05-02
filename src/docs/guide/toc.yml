@@ -4,4 +4,7 @@ howto:
     title: How To Upgrade Environments
     upgrade_production: Upgrade Production
     upgrade_stage: Upgrade Stage
+  plan:
+    title: How To Plan
+    plan_releases: Plan Releases
   miscellaneous: Miscellaneous How To

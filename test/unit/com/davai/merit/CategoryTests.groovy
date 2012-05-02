@@ -21,8 +21,6 @@ class CategoryTests {
 
         newCategory.validate()
         
-        println newCategory.errors
-        
         assert "unique" == newCategory.errors["name"]
     }
     

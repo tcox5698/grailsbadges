@@ -3,15 +3,17 @@ package com.davai.merit
 import static org.junit.Assert.*
 import org.junit.*
 import com.davai.merit.*
+import grails.test.mixin.*
 
-class RegisterControllerTests extends grails.test.ControllerUnitTestCase{
+class RegisterControllerTests {
 
     def String inputUsername = "fake@fakemail.fake"
+    def controller
 
-/*    @Before
+    @Before
     void setUp() {
-
-    }*/
+		controller = new RegisterController()
+    }
 
     @After
     void tearDown() {

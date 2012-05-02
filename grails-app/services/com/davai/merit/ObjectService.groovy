@@ -13,7 +13,9 @@ class ObjectService {
 		return criteria.find()
 	}
 	
-	public void save(Object object) {
-		object.save()
+	def save(Object object) {
+		def saveResult = object.save()
+		log.trace "save result: " + saveResult
+		return saveResult
 	}
 }

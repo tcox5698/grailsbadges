@@ -1,6 +1,6 @@
 package com.davai.merit
 
-class Category {
+class Category implements Serializable{
 
     String name
 
@@ -9,6 +9,6 @@ class Category {
     }
     
     public String toString() {
-        return id + ": " + this.name
+        return "Category: [id: " + id + ", name:" + this.name + "]"
     }
 }

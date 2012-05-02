@@ -12,6 +12,7 @@ class LoginEventHandlerService implements EventHandler {
 			queryString: " from Person p where p.username = :username",
 			arguments:[username: event.username]
 		)
+		
 		def person = objectService.find(personCriteria)
 		person = person[0]
 		

@@ -1,6 +1,7 @@
 footer.container.navbar-fixed-top {
 		top: auto;
 		bottom: 0;
+		background-color: white
 }    
 
 .meritBadge {
@@ -42,5 +43,8 @@ footer.container.navbar-fixed-top {
 	background-size:1600px;
 	background-repeat:no-repeat;
 	background-position:41% 54%;
+}
 
+.categoryButton {
+	margin: 2px; 
 }

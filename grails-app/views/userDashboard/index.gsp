@@ -9,9 +9,9 @@
     <h3><g:message code="label.recent.achievements" default="Recent Achievements"/></h3>
     <% unlockedAchievements.each { achievement -> %>
     <div class="meritBadge">
-            <img src="images/award-ribbon-badge-shaded.png"/>
+		    <g:img dir="images" file="award-ribbon-badge-shaded.png"/>
             <div class="meritBadgeTitle"><g:message code="${achievement.messageKey}" 
-            	args="${[achievement.messageArguments]}"/></div>
+            	args="${[achievement.messageArguments]}"/>${achievement.name}</div>
             <div class="meritBadgeDate"><g:formatDate date="${achievement.unlockedDate}" type="date"
             	 style="SHORT" timezone="${tz}"/></div>
     </div>	

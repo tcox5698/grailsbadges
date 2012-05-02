@@ -12,14 +12,15 @@
 		<link rel="shortcut icon" href="${resource(dir: 'images', file: 'star-medal-gold-orange.png')}" type="image/x-icon">
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'meritmain.css')}" type="text/css">
         <r:require modules="bootstrap"/>
- 		<g:layoutHead/>
+
         <g:javascript library="jquery" plugin="jquery"/>		
-		
+		<g:javascript library="jquery-ui" plugin="jquery-ui"/>	        
+ 		<g:layoutHead/>
         <r:layoutResources />
 	</head>
 	<body>
 		    
-
+ 
 		 
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
@@ -39,6 +40,7 @@
               </sec:access>
               <sec:ifLoggedIn>
 			  <li><a href="#user"><i class="icon-user icon-white"></i><sec:username /></a></li>
+              <li><a href="${createLink(uri:'/achieve/achieve')}">Achieve!</a></li>			  
 			  <!--<li><a href="#achievements"><span class="badge badge-success">2</span></a></li>-->
 			  <li><a href="${request.contextPath}/j_spring_security_logout">sign out</a></li>
 			  
@@ -50,6 +52,8 @@
     </div>		
 		
 		<div class="container">	
+			<br/>
+			<br/>
 			<br/>
 			<g:layoutBody/>
 		</div>

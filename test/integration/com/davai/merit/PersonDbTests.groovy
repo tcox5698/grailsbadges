@@ -27,15 +27,21 @@ class PersonDbTests {
 			accountExpired:"false",
 			enabled:"true")
             
-        existingPerson.save()
+        existingPerson.save(flush:true)
         
         assertFalse("should be no errors: " + existingPerson.errors, existingPerson.errors.hasErrors())
         
-        assertEquals "inputName", existingPerson.name  
+        assertEquals "inputName", existingPerson.name 
+        
+        log.info "saved person id: " + existingPerson.id 
+        log.info "saved person username: " + existingPerson.username         
                
         def p = Person.read(existingPerson.id)
+        
+        log.info "readed a person: " + p
+		assertEquals(existingPerson.username, p.username)
                         
-        p = SecUser.findByUsername(inputEmailAddress)
+        p = Person.findByUsername(inputEmailAddress)
         
         assertEquals "inputName", p.name
     }

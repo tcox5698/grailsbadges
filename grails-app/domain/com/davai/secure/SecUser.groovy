@@ -1,6 +1,6 @@
 package com.davai.secure
 
-abstract class SecUser {
+abstract class SecUser implements Serializable{
 
 	transient springSecurityService
 

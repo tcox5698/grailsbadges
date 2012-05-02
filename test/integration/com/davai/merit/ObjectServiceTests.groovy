@@ -1,10 +1,13 @@
 package com.davai.merit
 
+import static org.junit.Assert.*
+import org.junit.*
 import com.davai.merit.criteria.*
 
-class ObjectServiceTests extends GroovyTestCase {
+class ObjectServiceTests {
 	def objectService
 	
+	@Test
 	void testCreateReadFind() {
         def inputEmailAddress = "inputEmailAddress"
         

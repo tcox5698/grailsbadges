@@ -19,9 +19,11 @@ class UnlockedAchievementDbTests {
     @Test
     void testSomething() {
     	def person = providePerson()
+    	def category = provideCategory()
     
     	def unlockedAchievement = new UnlockedAchievement(
     		person: person,
+    		categories: [category],
     		messageKey: "test.messageKey",
     		messageArguments: "arg1, arg2",
     		unlockedDate: new Date()
@@ -50,4 +52,12 @@ class UnlockedAchievementDbTests {
 		
 		return person
 	}    
+	
+	def provideCategory() {
+		def category = new Category(name:"testCategory")
+		
+		category.save(flush:true)
+		
+		return category
+	}
 }

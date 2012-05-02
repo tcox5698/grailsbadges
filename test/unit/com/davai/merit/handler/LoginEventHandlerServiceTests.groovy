@@ -5,58 +5,66 @@ import com.davai.merit.*
 import com.davai.merit.criteria.*
 
 import groovy.mock.interceptor.*
-import grails.test.GrailsUnitTestCase
+import grails.test.mixin.*
 
-class LoginEventHandlerServiceTests extends GrailsUnitTestCase {
+@TestFor(LoginEventHandlerService)
+@Mock(Person)
+class LoginEventHandlerServiceTests {
 	def inputUsername = "inputUsername"
-	def handler = new LoginEventHandlerService()
 	def loginEvent = new LoginEvent(username:inputUsername)	
-	def objectServiceController = new MockFor(ObjectService)
+	def objectServiceController
 	def existingCountValue = 6
 
-	def expectedPerson = new Person(
+	def expectedPerson
+	
+	@Before
+	void setUp() {
+		objectServiceController = mockFor(ObjectService)
+	
+		expectedPerson = new Person(
             username: inputUsername,
             password: "expectedPassword", 
             name: "expectedName",
             accountLocked:"false",
             accountExpired:"false",
             enabled:"true"
-    )
+	    ).save()
+	}
+    
 
-	def testHandleEvent_AwardsAchievementOnFirstLogin() {
-	    mockDomain(Person,[expectedPerson])
-	
-		objectServiceController.demand.find(1) { personCriteria ->
+	void testHandleEvent_AwardsAchievementOnFirstLogin() {
+		objectServiceController.demand.find(1) { PersonCriteria personCriteria ->
 			assertEquals(inputUsername, personCriteria.arguments.username)
 			return [expectedPerson]
 		}
 					 
-		objectServiceController.demand.find(1) { countCriteria ->
+		objectServiceController.demand.find(1) { LoginCountCriteria countCriteria ->
 			assertEquals(expectedPerson, countCriteria.arguments.person)
 			return []
 		}
 				
-		objectServiceController.demand.save(1) { loginCount ->
+		objectServiceController.demand.save(1) { LoginCount loginCount ->
 			assertEquals(1, loginCount.countValue)	
 			assertEquals(expectedPerson, loginCount.person)			
 		}
 		
-		objectServiceController.demand.save(1) { unlockedAchievement ->
+		objectServiceController.demand.save(1) { UnlockedAchievement unlockedAchievement ->
 			assertEquals(expectedPerson, unlockedAchievement.person)
 			assertEquals("achievement.msg.login.singular", unlockedAchievement.messageKey)
 			assertEquals("1", unlockedAchievement.messageArguments)
 		}
 		
-		objectServiceController.use {
-			handler.objectService = new ObjectService()
+		service.objectService = objectServiceController.createMock()
 		
-			//EXECUTE
-			handler.handleEvent(loginEvent)
-		}	
+		//EXECUTE
+		service.handleEvent(loginEvent)
+		
+		//VERIFY
+		objectServiceController.verify()
 	}
 	
-	def testHandleEvent_UpdatesLoginStatistic_IfNonFibonacci_ThenNoAchievement() {
-		objectServiceController.demand.find(1) { personCriteria ->
+	void testHandleEvent_UpdatesLoginStatistic_IfNonFibonacci_ThenNoAchievement() {
+		objectServiceController.demand.find(1) { PersonCriteria personCriteria ->
 			assertEquals(inputUsername, personCriteria.arguments.username)
 			return [expectedPerson]
 		}	
@@ -64,42 +72,43 @@ class LoginEventHandlerServiceTests extends GrailsUnitTestCase {
 		def expectedLoginCount = new LoginCount(person: expectedPerson,
 			countValue: existingCountValue)
 	
-		objectServiceController.demand.find(1) { countCriteria ->
+		objectServiceController.demand.find(1) { LoginCountCriteria countCriteria ->
 			assertEquals(expectedPerson, countCriteria.arguments.person)
 			return [expectedLoginCount]
 		}
 		
-		objectServiceController.demand.save(1) { loginCount ->
+		objectServiceController.demand.save(1) { LoginCount loginCount ->
 			assertEquals(existingCountValue + 1, loginCount.countValue)	
 			assertEquals(expectedLoginCount.person, loginCount.person)		
 		}
 		
-		objectServiceController.use {
-			handler.objectService = new ObjectService()
+		service.objectService = objectServiceController.createMock()
+
+		//EXECUTE
+		service.handleEvent(loginEvent)
 		
-			//EXECUTE
-			handler.handleEvent(loginEvent)
-		}		
+		//VERIFY
+		objectServiceController.verify()
 	}
 	
-	def testIsFibonacci() {
+	void testIsFibonacci() {
 		//EXECUTE
-		assertTrue("zero should be fib",handler.isFibonacci(0)) 
-		assertTrue("1 should be fib",handler.isFibonacci(1)) 
-		assertTrue("2 should be fib",handler.isFibonacci(2)) 
-		assertTrue("3 should be fib",handler.isFibonacci(3)) 
-		assertFalse("4 should NOT be fib",handler.isFibonacci(4)) 
-		assertTrue("5 should be fib",handler.isFibonacci(5)) 						
-		assertFalse("6 should NOT be fib",handler.isFibonacci(6)) 						
-		assertFalse("7 should NOT be fib",handler.isFibonacci(7)) 						
-		assertTrue("8 should be fib",handler.isFibonacci(8)) 						
-		assertFalse("9 should NOT be fib",handler.isFibonacci(9)) 						
-		assertFalse("10 should NOT be fib",handler.isFibonacci(10)) 														
-		assertFalse("11 should NOT be fib",handler.isFibonacci(11)) 			
-		assertFalse("12 should NOT be fib",handler.isFibonacci(12)) 			
-		assertTrue("13 should be fib",handler.isFibonacci(13)) 			
-		assertFalse("14 should NOT be fib",handler.isFibonacci(14)) 			
-		assertFalse("15 should NOT be fib",handler.isFibonacci(15)) 													
-		assertFalse("16 should NOT be fib",handler.isFibonacci(16)) 		
+		assertTrue("zero should be fib",service.isFibonacci(0)) 
+		assertTrue("1 should be fib",service.isFibonacci(1)) 
+		assertTrue("2 should be fib",service.isFibonacci(2)) 
+		assertTrue("3 should be fib",service.isFibonacci(3)) 
+		assertFalse("4 should NOT be fib",service.isFibonacci(4)) 
+		assertTrue("5 should be fib",service.isFibonacci(5)) 						
+		assertFalse("6 should NOT be fib",service.isFibonacci(6)) 						
+		assertFalse("7 should NOT be fib",service.isFibonacci(7)) 						
+		assertTrue("8 should be fib",service.isFibonacci(8)) 						
+		assertFalse("9 should NOT be fib",service.isFibonacci(9)) 						
+		assertFalse("10 should NOT be fib",service.isFibonacci(10)) 														
+		assertFalse("11 should NOT be fib",service.isFibonacci(11)) 			
+		assertFalse("12 should NOT be fib",service.isFibonacci(12)) 			
+		assertTrue("13 should be fib",service.isFibonacci(13)) 			
+		assertFalse("14 should NOT be fib",service.isFibonacci(14)) 			
+		assertFalse("15 should NOT be fib",service.isFibonacci(15)) 													
+		assertFalse("16 should NOT be fib",service.isFibonacci(16)) 		
 	}
 }
