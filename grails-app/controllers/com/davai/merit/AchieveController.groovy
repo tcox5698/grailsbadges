@@ -10,7 +10,7 @@ class AchieveController {
 	def transient categoryService
 
 	def populateAchievement(conversation, params) {
-		conversation.unlockedAchievement = conversation.unlockedAchievement ? conversation.unlockedAchievement : new UnlockedAchievement(params)
+		conversation.unlockedAchievement = conversation.unlockedAchievement ?: new UnlockedAchievement(params)
 		conversation.unlockedAchievement.person = springSecurityService.currentUser	
 	}
 	
@@ -25,8 +25,6 @@ class AchieveController {
 			
 			def category = objectService.find(categoryCriteria)[0]
 			
-			log.error "category: " + category
-			
 			if (!category) {
 				category = objectService.save(new Category(name:catName))
 			}
@@ -34,8 +32,7 @@ class AchieveController {
 		}
 	}
 
-	def categoryList() {
-		
+	def categoryList() {		
 		def results = objectService.find(
 			new CategoryCriteria(
 				queryString:"from Category c where upper(c.name) like :name",
@@ -61,7 +58,6 @@ class AchieveController {
 				populateAchievement(conversation, params)
 			}.to "saveAndDone"
 			on("cancel").to "cancel"
-
 		}
 	
 		enterCategory {
@@ -92,8 +88,6 @@ class AchieveController {
 				objectService.save(conversation.unlockedAchievement)				
 			}
 			on("success").to "finish"
-			
-
 		}
 		
 		finish {
