@@ -11,7 +11,7 @@
         <h1>Merit Badges</h1>
         <h4>What can I do?  What have I done?  Track your skills with Merit Badges.</h4>
         <p><div class="progress progress-warning progress-striped active">
-		  			<div class="bar" style="width: 20%;">Alpha!</div>
+		  			<div class="bar" style="width: 30%;">Alpha!</div>
 				</div></p>
         <!--<p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>-->
       </div>
