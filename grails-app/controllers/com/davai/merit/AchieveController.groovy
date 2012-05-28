@@ -53,7 +53,6 @@ class AchieveController {
 	def achieveFlow = {
 		enterName {
 			on("continue"){
-				log.error "continue event on enterName"			
 				populateAchievement(conversation, params)
 				def achievementStrings = [conversation.unlockedAchievement.name,conversation.unlockedAchievement.description]
 				conversation.suggestedCategories=categoryService.suggestCategories(achievementStrings.findAll{it != null})
@@ -67,11 +66,9 @@ class AchieveController {
 	
 		enterCategory {
 			on("continue"){
-				log.error "continue event on enterCategory"
 				populateCategory(conversation, params)				
 				}.to("skillify")
 			on("saveAndDone"){
-				log.error "saveAndDone event on enterCategory"
 				populateCategory(conversation, params)				
 				}.to("saveAndDone")			
 			on("cancel").to("cancel")						
@@ -86,8 +83,6 @@ class AchieveController {
 	
 		saveAndDone {	
 			action {
-				log.error "here it is:" +conversation.unlockedAchievement
-				log.error "does it have errors:" + conversation.unlockedAchievement.hasErrors()
 				populateAchievement(conversation, params)				
 				if (conversation.unlockedAchievement.hasErrors()) {
 					conversation.unlockedAchievement.errors.each{

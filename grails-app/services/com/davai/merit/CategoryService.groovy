@@ -6,7 +6,6 @@ class CategoryService {
 	def objectService
 
     def suggestCategories(strings) {
-    	log.error "suggest categories for strings: " + strings
     	def cats = objectService.find(new CategoryCriteria(queryString:"from Category c"))
 
 		def searchStrings = []

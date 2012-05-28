@@ -5,7 +5,6 @@ def class ObjectHive {
 	def flush = true
 
 	def validateIt(obj) {
-		log.error "validateIt - for obj: " + obj
 		if (!obj.validate()) {
 			obj.errors.allErrors.each {
 				println "\n" + it 
@@ -23,16 +22,13 @@ def class ObjectHive {
 	def provideCategories(names) {
 		def list = []
 		names.each{
-			log.error "provideCategories creating with name: " + it
 			list.add(createCategory(it))
 		}
 		return list
 	}
 
 	def createCategory(name) {
-		log.error "creating category with name: " + name
 		def category = new Category(name: name)
-				log.error "creating category  - calling validate with cat: " + category
 		//validateIt(category)
 		category.save(flush:flush, validate:false)
 		assert category
