@@ -50,7 +50,7 @@
       </div>
 
       <div class="form-actions">
-        <g:submitButton name="continue" value="Apply and move on to Skill-ify!" class="btn btn-primary"/>
+        <%--<g:submitButton name="continue" value="Apply and move on to Skill-ify!" class="btn btn-primary"/>--%>
         <g:submitButton name="saveAndDone" value="Save and Done" class="btn btn-primary"/>        
 		<g:submitButton name="cancel" value="Cancel" class="btn"/>  
       </div>

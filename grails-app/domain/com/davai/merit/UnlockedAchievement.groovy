@@ -21,6 +21,7 @@ class UnlockedAchievement implements Serializable {
     }
     
     static constraints = {
+    	unlockedDate()
 	    name(nullable:true)
         messageKey(nullable:true)
         messageArguments(nullable:true)

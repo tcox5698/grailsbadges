@@ -1,6 +1,6 @@
 package com.davai.merit
 
-class Category implements Serializable{
+class Category implements Serializable {
 
     String name
 
