@@ -2,8 +2,9 @@ howto:
   title: How To
   upgrade_environments: 
     title: How To Upgrade Environments
-    upgrade_production: Upgrade Production
+    stage_locally: Stage Locally
     upgrade_stage: Upgrade Stage
+    upgrade_production: Upgrade Production
   plan:
     title: How To Plan
     plan_releases: Plan Releases
