@@ -20,7 +20,7 @@
 
 	</div>
   </div>
-  <form class="form-horizontal" action="${createLink(uri:'/achieve/achieve')}">
+  <g:form class="form-horizontal">
     <fieldset>
       <legend>What skill level did this demonstrate?</legend>
 
@@ -28,20 +28,21 @@
         <label class="control-label" for="category">Select a skill level:</label>
 
         <div class="controls">
-          <g:radioGroup name="lovesGrails"
-              labels="['1. Learner','2. Beginner','3. Practitioner','4. Expert','5. Leader','6. Authority']"
-              values="['Learner','Beginner','Practitioner','Expert','Leader','Authority']">
-<p>${it.radio} ${it.label}</p>
-</g:radioGroup>
+          <g:radioGroup name="skillLevel"
+              labels="${skillLevels*.name}"
+              values="${skillLevels*.id}"
+              value="${skillLevels[0].id}">
+			<h3 >${it.radio} ${it.label.split(":")[0]} <small>${it.label.split(":")[1]}</small> </h3>
+		  </g:radioGroup>
 
         </div>
       </div>
 
       <div class="form-actions">
-        <button type="submit" class="btn btn-primary">Save now - I'm done! <i class="icon-ok icon-white"></i></button>  
-        <button class="btn">Cancel</button>
+        <g:submitButton name="saveAndDone" value="Save and Done" class="btn btn-primary"/>        
+		<g:submitButton name="cancel" value="Cancel" class="btn"/>  
       </div>
     </fieldset>
-  </form>
+  </g:form>
 </body>
 </html>

@@ -1,6 +1,9 @@
 
 h1. Upgrade stage
 # Make sure stage matches production: 
+{warning}
+heroku_txf is not working.  Instead for now you have to heroku_backup.sh of prod to local machine, then put that in a public dropbox folder, then restore that to your staging environment, like this:{code}heroku pgbackups:restore HEROKU_POSTGRESQL_GRAY 'http://dl.dropbox.com/u/11761835/meritprod.dump' --app meritstage --confirm meritstage{code}
+{warning}
 {code}heroku_txf.sh meritprod meritstage{code}
 # Make sure you're on master
 # Execute: git push herokustage master

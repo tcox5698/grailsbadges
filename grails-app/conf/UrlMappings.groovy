@@ -16,6 +16,7 @@ class UrlMappings {
 		
 		"/admin/person/$action?"(controller: "person")
 		"/admin/category/$action?"(controller: "category")	
+		"/admin/skillLevel/$action?"(controller: "skillLevel")			
 		"/admin/role/$action?"(controller: "role")		
 		"/admin/unlockedAchievement/$action?"(controller: "unlockedAchievement")			
 		"/admin/user/$action?"(controller: "user")	

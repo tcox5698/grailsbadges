@@ -15,6 +15,10 @@ class AchieveController {
 	}
 	
 	def populateCategory(conversation, params) {
+		if (params.selectedCategories == "") {
+			return
+		}
+	
 		def catNames = params.selectedCategories.split(',')
 		
 		catNames.each { catName ->
@@ -26,10 +30,15 @@ class AchieveController {
 			def category = objectService.find(categoryCriteria)[0]
 			
 			if (!category) {
-				category = objectService.save(new Category(name:catName))
+				category = new Category(name:catName)
 			}
-			conversation.unlockedAchievement.addToCategories(category)			
+			conversation.categories = conversation.categories?:[]
+			conversation.categories.add(category)			
 		}
+	}
+
+	def populateSkillLevel(conversation, params) {
+		conversation.unlockedAchievement.skillLevel = SkillLevel.read(params.skillLevel)
 	}
 
 	def categoryList() {		
@@ -62,7 +71,11 @@ class AchieveController {
 	
 		enterCategory {
 			on("continue"){
-				populateCategory(conversation, params)				
+					populateCategory(conversation, params)		
+					conversation.skillLevels = []
+					SkillLevel.findAll().each{
+						conversation.skillLevels.add([id:it.id, name:it.name + ":" + it.description])
+					}	
 				}.to("skillify")
 			on("saveAndDone"){
 				populateCategory(conversation, params)				
@@ -71,6 +84,10 @@ class AchieveController {
 		}
 		
 		skillify {
+			on("saveAndDone") 
+			{
+				populateSkillLevel(conversation, params)
+			}.to("saveAndDone")
 		}
 		
 		cancel {
@@ -78,13 +95,23 @@ class AchieveController {
 		}
 	
 		saveAndDone {	
-			action {
-				populateAchievement(conversation, params)				
+			action {		
 				if (conversation.unlockedAchievement.hasErrors()) {
 					conversation.unlockedAchievement.errors.each{
 						log.error "each error: " + it
 					}
 				}
+				
+				def mergedCategories = []
+				
+				conversation.categories.each{
+					mergedCategories.add(it.merge())
+				}
+				
+				mergedCategories.each{
+					conversation.unlockedAchievement.addToCategories(it)
+				}
+			
 				objectService.save(conversation.unlockedAchievement)				
 			}
 			on("success").to "finish"

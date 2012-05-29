@@ -35,6 +35,26 @@ class UnlockedAchievementCriteriaTests extends GroovyTestCase {
 		}		
 	}
 	
+	void testFindByPerson_NoMaxResults() {
+        def existingPerson = objectHive.providePeople(1)[0]
+        def unlockedAchievements = objectHive.provideUnlockedAchievements(5, existingPerson)
+        
+		unlockedAchievements.each{it->
+			assert it.save(flush:true)
+		}
+
+        def unlockedCriteria = new UnlockedAchievementCriteria(
+        	queryString: "from UnlockedAchievement a where a.person = :person",
+        	arguments: [person: existingPerson])
+        
+		//EXECUTE
+		def achievements = objectService.find(unlockedCriteria)
+			
+		//VERIFY
+ 		assertEquals(5, achievements.size())
+ 		assertEquals(unlockedAchievements[0].messageKey, achievements[0].messageKey)
+	}	
+	
 	void testFindByPerson() {
         def existingPerson = objectHive.providePeople(1)[0]
         def unlockedAchievements = objectHive.provideUnlockedAchievements(5, existingPerson)

@@ -5,7 +5,6 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
    </head>
 <body>
-
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="hero-unit landscape-img">
         <h1>Merit Badges</h1>

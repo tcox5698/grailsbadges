@@ -14,6 +14,10 @@ class ObjectService {
 	}
 	
 	def save(Object object) {
+		if (object.isAttached()) {
+			object = object.merge()
+		}
+	
 		def saveResult = object.save()
 		log.trace "save result: " + saveResult
 		return saveResult

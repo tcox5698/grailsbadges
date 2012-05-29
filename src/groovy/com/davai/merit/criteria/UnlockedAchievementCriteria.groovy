@@ -10,6 +10,11 @@ public class UnlockedAchievementCriteria extends Criteria {
 	
 	def doFindAll(queryString, arguments) {
 		log.trace "finding: " + ["queryString":queryString,"arguments":arguments,"maxResults":maxResults]
-		return UnlockedAchievement.findAll(queryString, arguments, [max:maxResults])
+		
+		def pagingParams = [:]
+		
+		if (maxResults) pagingParams.put('max', maxResults)
+		
+		return UnlockedAchievement.findAll(queryString, arguments, pagingParams)
 	}	
 }

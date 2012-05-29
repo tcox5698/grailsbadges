@@ -48,6 +48,24 @@ def class ObjectHive {
 		return list		
 	}
 
+	def provideSkillLevels(int count = 1) {
+		def list = []
+	
+		for (i in 0..count) {
+			def skillLevel = new SkillLevel(
+				name: "skill" + i,
+				description:"skillDescription" + i,
+				rank: i,
+				multiplier: i+1
+			)
+			skillLevel.save(flush:flush)
+			assert skillLevel
+			list.add(skillLevel)
+		}
+		
+		return list
+	}
+	
 	def provideUnlockedAchievements(int count = 1, Person person ) {
 		def counter = 0
 		def list = []

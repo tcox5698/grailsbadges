@@ -14,7 +14,7 @@
         <r:require modules="bootstrap"/>
 
         <g:javascript library="jquery" plugin="jquery"/>		
-		<g:javascript library="jquery-ui" plugin="jquery-ui"/>	        
+		<g:javascript library="jquery-ui" plugin="jquery-ui"/>	        						
  		<g:layoutHead/>
         <r:layoutResources />
 	</head>
@@ -52,9 +52,6 @@
     </div>		
 		
 		<div class="container">	
-			<br/>
-			<br/>
-			<br/>
 			<g:layoutBody/>
 		</div>
       
@@ -66,5 +63,9 @@
 		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
 		<g:javascript library="application"/>
         <r:layoutResources />
+		<g:javascript src="uiteoi-ico/prototype.js" />		     
+		<g:javascript src="uiteoi-ico/es5.js" />		     
+		<g:javascript src="uiteoi-ico/raphael-1.5.2.js" />		     
+		<g:javascript src="uiteoi-ico/ico.js" />	        
 	</body>
 </html>

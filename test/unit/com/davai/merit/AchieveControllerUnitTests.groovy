@@ -54,11 +54,6 @@ class AchieveControllerUnitTests {
     	def conversation = [:]
     	params.selectedCategories = "testCategory"
     	def expectedCategory = hive.provideCategories()[0]
-    	def workingAchievement = hive.provideUnlockedAchievements(expectedPerson)[0]
-    		
-    	log.info "achmt: " + workingAchievement
-    		
-    	conversation.unlockedAchievement = workingAchievement
     	
 		objectServiceController.demand.find(1) { CategoryCriteria categoryCriteria ->
 			assertEquals(params.selectedCategories, categoryCriteria.arguments.name)
@@ -71,8 +66,8 @@ class AchieveControllerUnitTests {
         controller.populateCategory(conversation, params)
         
         //VERIFY
-        log.info "did i save the category? here: " + conversation.unlockedAchievement.categories
-        assertEquals([expectedCategory] as Set, conversation.unlockedAchievement.categories)   
+        log.info "did i save the category? here: " + conversation.categories
+        assertEquals([expectedCategory], conversation.categories)   
     }  
     
     void testCategoryList() {
@@ -101,35 +96,23 @@ class AchieveControllerUnitTests {
     	assertEquals(2, response.json.length())
     	
     	assertTrue("whoops: " + response.json, response.json.containsAll(expectedCategoryNames))
-    	
-
     }
     
 	void testPopulateCategory_OneNewCategory() {
     	def conversation = [:]
     	params.selectedCategories = "testCategory"
-    	def workingAchievement = hive.provideUnlockedAchievements(expectedPerson)[0]
-    		
-    	log.fine "achmt: " + workingAchievement
-    		
-    	conversation.unlockedAchievement = workingAchievement
     	
 		objectServiceController.demand.find(1) { CategoryCriteria categoryCriteria ->
 			assertEquals(params.selectedCategories, categoryCriteria.arguments.name)
 			return []
 		}   
-		
-		objectServiceController.demand.save(1) {Category category ->
-			assertEquals("testCategory", category.name)
-			return category
-		}
-		
+			
 		controller.objectService = objectServiceController.createMock()		 	
     
     	//EXECUTE
         controller.populateCategory(conversation, params)
         
         //VERIFY
-        assertEquals("testCategory", conversation.unlockedAchievement.categories.iterator().next().name)   
+        assertEquals("testCategory", conversation.categories.iterator().next().name)   
     }       
 }

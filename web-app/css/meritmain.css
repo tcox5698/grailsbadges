@@ -1,3 +1,7 @@
+body {
+	padding: 60px;
+}
+
 footer.container.navbar-fixed-top {
 		top: auto;
 		bottom: 0;
@@ -6,7 +10,6 @@ footer.container.navbar-fixed-top {
 
 .meritBadge {
 		width: 100px;
-		height: 100px;
 		background-repeat: no-repeat;
 		background-position: center center;
 		text-align: center;
@@ -47,4 +50,16 @@ footer.container.navbar-fixed-top {
 
 .categoryButton {
 	margin: 2px; 
+}
+
+.radioLabel {
+	font-size:19.5px
+}
+
+.dashRow {
+
+}
+
+.dashCell {
+	overflow: auto;
 }

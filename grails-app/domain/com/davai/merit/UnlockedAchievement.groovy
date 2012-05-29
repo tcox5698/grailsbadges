@@ -7,17 +7,18 @@ class UnlockedAchievement implements Serializable {
     String messageKey
     String messageArguments
     Date unlockedDate
+    SkillLevel skillLevel
     static hasMany = [categories:Category]
     
     public UnlockedAchievement(Person person, String messageKey, String messageArguments, Date unlockedDate) {
     	person = person
     	messageKey = messageKey
     	messageArguments = messageArguments
-    	unlockedDate = unlockedDate
+	   	unlockedDate = unlockedDate
     }
    
     public String toString() {
-        return [id, person, messageKey, messageArguments].join(":") 
+        return [id, person, messageKey, messageArguments, unlockedDate, skillLevel].join(":") 
     }
     
     static constraints = {
@@ -26,5 +27,6 @@ class UnlockedAchievement implements Serializable {
         messageKey(nullable:true)
         messageArguments(nullable:true)
         description(nullable:true)
+        skillLevel(nullable:true)
     }    
 }
