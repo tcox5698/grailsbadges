@@ -49,6 +49,15 @@ class UserDashboardControllerTests {
     		n+=2
     	}
 
+		def mc = [
+			compare:{b,a -> 
+				def aMultiplier = a.skillLevel?.multiplier?:0
+				def bMultiplier = b.skillLevel?.multiplier?:0
+				aMultiplier.equals(bMultiplier)? 0: Math.abs(aMultiplier)<Math.abs(bMultiplier)? -1: 1
+			}
+		] as Comparator
+		expectedAchievements.sort(mc)
+
     	System.out.println "expectedAch: " + expectedAchievements
  
     	response.format = "json"
