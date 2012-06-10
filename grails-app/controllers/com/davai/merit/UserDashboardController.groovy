@@ -49,7 +49,12 @@ class UserDashboardController {
 		def results = []
 		def runningTotal = 0
 		def previousDate
-		resultsByDate.eachWithIndex{it, i ->
+			
+		resultsByDate = resultsByDate.sort{
+			dateFormat.parse(it.key)
+		}
+	
+ 		resultsByDate.eachWithIndex{it, i ->
 			def currentDate = dateFormat.parse(it.key)
 			while (previousDate != null && previousDate + 1 != currentDate) {
 				def fillerDate = previousDate + 1
@@ -64,7 +69,7 @@ class UserDashboardController {
 			results.add(result)		
 			
 			previousDate = dateFormat.parse(it.key)
-		}
+ 		}
 		
 		results.last()["label"]=dateFormat.format(previousDate)
 		
