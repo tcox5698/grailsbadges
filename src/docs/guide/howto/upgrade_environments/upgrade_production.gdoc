@@ -7,3 +7,5 @@ h1. Upgrade production
 {code}heroku_backup.sh meritprod{code}
 ## pull the dump into your stage, test and dev environments: 
 {code}db_restore_from_dump.sh mbgrails_stage meritprod.dump{code}
+## update application.properties and increment to next version snapshot
+{warning}You may want to upgrade Grails back to 2.0.4 - depends on whether Heroku has caught up yet.{warning}

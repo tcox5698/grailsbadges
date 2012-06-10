@@ -6,5 +6,10 @@ heroku_txf is not working.  Instead for now you have to heroku_backup.sh of prod
 {warning}
 {code}heroku_txf.sh meritprod meritstage{code}
 # Make sure you're on master
+# Edit application.properties and remove snapshot suffix from app.version
+{warning}You may have to bring grails down to version 2.0.3 because Heroku doesn't support 2.0.4 yet.{warning}
+# Commit and push the application.properties change to the central repo.
+# Tag repository with the app.version: {code}git tag -a v0.5 -m 'version 0.5'{code}
+# Push the tags to the central repo: {code}git push origin master --tags{code}
 # Execute: git push herokustage master
 # Test it!
