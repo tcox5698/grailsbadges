@@ -9,3 +9,5 @@ h1. Upgrade production
 {code}db_restore_from_dump.sh mbgrails_stage meritprod.dump{code}
 ## update application.properties and increment to next version snapshot
 {warning}You may want to upgrade Grails back to 2.0.4 - depends on whether Heroku has caught up yet.{warning}
+## Push to central repo. Checkout your new branch and move forward!
+{warning}You may want to delete the development branch that you were working with.{warning}

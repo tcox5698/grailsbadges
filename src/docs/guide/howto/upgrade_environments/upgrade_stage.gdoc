@@ -13,3 +13,5 @@ heroku_txf is not working.  Instead for now you have to heroku_backup.sh of prod
 # Push the tags to the central repo: {code}git push origin master --tags{code}
 # Execute: git push herokustage master
 # Test it!
+
+{warning}At this point - if successful - proceed with pushing to Production!{warning}
