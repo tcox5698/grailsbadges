@@ -22,4 +22,8 @@ class ObjectService {
 		log.trace "save result: " + saveResult
 		return saveResult
 	}
+	
+	def select(String queryString) {
+		return Person.executeQuery(queryString)
+	}
 }

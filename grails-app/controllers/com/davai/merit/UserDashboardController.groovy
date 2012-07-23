@@ -23,6 +23,14 @@ class UserDashboardController {
 
     	render view:"index", model: [unlockedAchievements: unlockedAchievements]	
     }
+
+	def userBreadthChartData() {
+   		def results = [[label:"Java",value:"3"],[label:"Database",value:"2"],[label:"Release",value:"7"]]
+   
+		render(contentType: "text/json") {
+			return results
+		}     
+    }
     
     def userProgressDepthChartData() {
     	def person = springSecurityService.currentUser

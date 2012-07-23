@@ -8,6 +8,26 @@ class ObjectServiceTests {
 	def objectService
 	
 	@Test
+	void testFreeFormQuery() {
+		
+	
+		//EXECUTE
+		def results = objectService.select("select c, count(a.id) \
+		from UnlockedAchievement a \
+		left join a.categories as c \
+		where c is not null \
+		group by c")
+		
+		//VERIFY
+		assertTrue results.size > 0
+		
+		results.each{
+			assertEquals Category, it[0].class
+			assertEquals Long, it[1].class
+		}
+	}
+	
+	@Test
 	void testCreateReadFind() {
         def inputEmailAddress = "inputEmailAddress"
         

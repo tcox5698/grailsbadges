@@ -29,9 +29,18 @@ class UserDashboardControllerTests {
     			
     }
 
-	//test only returns achievements within period range
-	//test multi zero pointed returns
-	//test mix of zero and non-zero pointed returns
+	void testUserBreadthChartData_ForOneAchievement() {
+		//EXECUTE
+		controller.userBreadthChartData()
+		
+		//VERIFY
+		//objectServiceController.verify()
+		assertEquals(3, response.json.length())	
+	}
+
+	//TODO test only returns achievements within period range
+	//TODO test multi zero pointed returns
+	//TODO test mix of zero and non-zero pointed returns
 
 	void testUserProgressDepthChartData_CalculatesDatedWeightedProgress() {
 		def expectedDate = new Date();
@@ -44,11 +53,9 @@ class UserDashboardControllerTests {
 			i.unlockedDate = expectedDate + n
 			i.unlockedDate.putAt(Calendar.MINUTE, n+1)
     		i.skillLevel = skillLevels[n]
-    		System.out.println "n equals: " + n
-    		System.out.println "setting up ach: " + i
     		n+=2
-    	}
-
+    	}	
+    	
 		def mc = [
 			compare:{b,a -> 
 				def aMultiplier = a.skillLevel?.multiplier?:0

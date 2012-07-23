@@ -27,26 +27,50 @@
 			</div>
 		</div> <!-- end span6-->    
   	</div> <!-- end row-fluid-->    
-  	<%--<div class="row-fluid dashRow"> 		
+  	<div class="row-fluid dashRow"> 		
   		<div class="span6 dashCell">  	
-			<h2><g:message code="label.progress.in.depth" default="Progress in Depth"/></h2>  		
+			<h2><g:message code="label.progress.in.depth" default="Achievement in Breadth"/></h2>  		
 			<div id="outerDiv" style="width:400px;height:250px">
-				[another chart here]
+				<div class="chartDiv" id="breadthChart">
+				</div>
 			</div>
 
 		</div> <!-- end span6-->   			
-  		<div class="span6 dashCell">  	
+  		<%--<div class="span6 dashCell">  	
 			<h2><g:message code="label.progress.in.depth" default="Progress in Depth"/></h2>  		
 			<div id="outerDiv" style="width:400px;height:250px">
 				[another chart here]
 			</div>			
-		</div> <!-- end span6-->    		
-  	</div> <!-- end row-fluid-->		--%>
+		</div> <!-- end span6-->--%>    		
+  	</div> <!-- end row-fluid-->		
 <script>
 	jQuery.noConflict();
 	jQuery(function() {	
 		doPlotProgress();
+		doPlotBreadth();
 	});			
+	
+	function doPlotBreadth() {
+		var options = {};
+				options.data = [];
+				options.labels = [];
+				options.containerDivId = 'outerDiv';
+				options.chartDivId = 'breadthChart';
+				options.chartType = 'bar';
+			
+					{jQuery.getJSON("${createLink(uri:'/userDashboard/userBreadthChartData')}", function(data) {
+						jQuery.each(data,function(i, item){
+								this.data.push(item.value);
+								this.labels.push(item.label);
+						}.bind(this));
+				
+						createChart(this);
+					}.bind(options)); }
+			
+// 				options.data = [2, 5, 6, 10, 15, 16];
+// 		 		options.labels = ['JavaScript', 'Release Management', 'Database', 'Java', 'Swimming', 'Cooking'];
+// 				createChart(options);	
+	}
 		
 	function doPlotProgress() {
 		var options = {};
@@ -67,7 +91,7 @@
 	
 // 		options.data = [2, 5, 6, 10, 15, 16, 16, 25, 25];
 // 		options.labels = ['2010-06', '2010-07', '2010-08', '2010-09', '2010-10', '2010-11', '2010-12', '2011-01', '2011-02'];
-		createChart(options);
+		//createChart(options);
 	}		
 		
 	function createChart(options) {
@@ -104,7 +128,7 @@
 				  , grid : true
 				  , mouse_pointer: true
 				  , status_bar : true
-	//			  , x_padding_right: 50
+				  , x_padding_left: 50
 				  , width: options.width
 				  , height: options.height
 				}
