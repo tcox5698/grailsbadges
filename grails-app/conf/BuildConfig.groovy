@@ -43,6 +43,8 @@ grails.project.dependency.resolution = {
         runtime ":jquery-ui:1.8.7"
         compile ":famfamfam:1.0"
         
+        test ":cucumber:0.6.0"
+        
         compile ":webflow:2.0.0"
     
         runtime ":hibernate:$grailsVersion"
