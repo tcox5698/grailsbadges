@@ -5,20 +5,26 @@ this.metaClass.mixin (cucumber.runtime.groovy.EN)
 def cukeGetter = new CukeGetter()
 def result
 
-Given(~'^I have no cucumbers$') { ->
+Given(~/^I have no cucumbers$/) { ->
     
 }
-When(~'^I ask for 2 cucumbers$') { ->
-    result = cukeGetter.getCucumbers(10)
+When(~/^I ask for (\d+) cucumbers$/) { int arg1 ->
+    result = cukeGetter.getCucumbers(arg1)
 }
-Then(~'^I get 2 cucumbers$') { ->
-    assert 2 == result.size
+Then(~/^I get (\d+) cucumbers$/) { int arg1 ->
+    assert arg1 == result.size
 }
 
 def class CukeGetter {
 
 	def getCucumbers(count) {
-		return ["cuke1", "cuke2"]
+		def cukes = []
+	
+		for (i in 0..<count) {
+			cukes.add("cuke" + i)
+		} 
+		
+		return cukes
 	}
 
 }

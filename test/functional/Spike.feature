@@ -3,7 +3,12 @@ Feature: cucumber spike
 	I want to create acceptance tests that will be executed automatically
 	So I can trust that the product features work as we enhance the product
 	
-Scenario: first cucumber tests
+Scenario: ask for 2 cucumbers
 	Given I have no cucumbers
 	When I ask for 2 cucumbers
 	Then I get 2 cucumbers
+
+Scenario: ask for 3 cucumbers
+	Given I have no cucumbers
+	When I ask for 3 cucumbers
+	Then I get 3 cucumbers
