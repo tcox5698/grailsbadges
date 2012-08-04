@@ -12,3 +12,15 @@ Scenario: ask for 3 cucumbers
 	Given I have no cucumbers
 	When I ask for 3 cucumbers
 	Then I get 3 cucumbers
+
+Scenario Outline: ask for a number of cucumbers
+	Given I have no cucumbers
+	When I ask for <some> cucumbers
+	Then I get <that> number of cucumbers
+
+Examples: some
+	| some	| that	|
+	| 0		| 0		|
+	| 2		| 2		|
+	| -1	| -1	|
+		
