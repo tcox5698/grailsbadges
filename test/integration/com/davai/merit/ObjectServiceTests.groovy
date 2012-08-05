@@ -6,10 +6,21 @@ import com.davai.merit.criteria.*
 
 class ObjectServiceTests {
 	def objectService
+	def objectHive
+	
+	@Before
+	void before() {
+		this.objectHive = new ObjectHive()
+	}
 	
 	@Test
 	void testFreeFormQuery() {
-		
+		def category = this.objectHive.provideCategories(["Bob"])[0]		
+		assert null != category
+		def unlockedAchievement = this.objectHive.provideUnlockedAchievements(1)[0]
+		assert null != unlockedAchievement
+		unlockedAchievement.addToCategories(category)
+		objectService.save(unlockedAchievement)
 	
 		//EXECUTE
 		def results = objectService.select("select c, count(a.id) \
@@ -19,7 +30,7 @@ class ObjectServiceTests {
 		group by c")
 		
 		//VERIFY
-		assertTrue results.size > 0
+		assert results.size == 1
 		
 		results.each{
 			assertEquals Category, it[0].class

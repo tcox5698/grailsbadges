@@ -16,7 +16,11 @@ def class ObjectHive {
 	def provideUnlockedAchievements(int count = 1) {
 		def person = providePeople(1)[0]
 		
-		return provideUnlockedAchievements(count, person)
+		def achv = provideUnlockedAchievements(count, person)
+		
+		assert null!= achv
+		
+		return achv
 	}
 
 	def provideCategories(names) {
