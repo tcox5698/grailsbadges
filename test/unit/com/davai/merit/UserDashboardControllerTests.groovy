@@ -64,8 +64,6 @@ class UserDashboardControllerTests {
 			}
 		] as Comparator
 		expectedAchievements.sort(mc)
-
-    	System.out.println "expectedAch: " + expectedAchievements
  
     	response.format = "json"
     	

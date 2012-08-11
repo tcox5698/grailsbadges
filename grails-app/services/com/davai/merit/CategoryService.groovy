@@ -34,19 +34,15 @@ class CategoryService {
 			!(it ==~ /(?i)on|in|a|the|for|with|to|up/)			
 		}
 		
-		System.out.println("searchStrings: " + searchStrings)
 		
 		def matchString = searchStrings.join(".*")
 		matchString = /(?i).*${matchString}.*/
-		
-		System.out.println("matchString: " + matchString)
 				
 		returnCats = cats.findAll {
 			it.name ==~ matchString
 		}
 		
 		if (!returnCats.isEmpty()) {
-			System.out.println("FOUND by matchString: " + matchString)		
 			return returnCats	
 		}
 		
@@ -57,21 +53,15 @@ class CategoryService {
 		}
 		
 		if (!returnCats.isEmpty()) {
-			System.out.println("FOUND by matchString: " + matchString)		
 			return returnCats	
 		}
 		
 		def characterList = collectAsCharacters(strings)
 		
-		System.out.println("characterList: " + characterList)
-		System.out.println("strings: " + strings)
-		
 		if (characterList.containsAll(strings)) {
 			return []
 		}
-		
-		System.out.println("found nothing by matchString: " + matchString)
-		
+				
 		filterCats(cats, characterList)
 	}
 	

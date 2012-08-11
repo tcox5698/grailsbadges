@@ -13,7 +13,6 @@ Given(~/^the category "([^"]*)" exists$/) { String arg1 ->
 	objectService.save(new Category(name:arg1))
 }
 When(~/^I type "([^"]*)"$/) { String arg1 ->
-	System.out.println("typed: " + arg1)
 	results = categoryService.suggestCategories(arg1)
 }
 Then(~/^the application suggests "([^"]*)"$/) { String expectedSuggestion ->
@@ -40,12 +39,8 @@ Then(~'^the application suggests the following$') { Object dataTable ->
 	}	
 	
 	def actualCats = results.collect{it -> 
-		System.out.println("class: " + it.class.name)
-		System.out.println("collection actual name: " + it.name)
 		return it.name
 	}
-	
-	System.out.println("got actual cats: " + actualCats)
 	
 	assert actualCats.containsAll(expectedCats)
 	assert expectedCats.containsAll(actualCats)
