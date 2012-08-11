@@ -1,4 +1,5 @@
 import org.codehaus.groovy.grails.test.support.GrailsTestRequestEnvironmentInterceptor
+import com.davai.merit.*
 
 this.metaClass.mixin (cucumber.runtime.groovy.Hooks)
 
@@ -12,4 +13,5 @@ Before () {
 
 After () {
     scenarioInterceptor.destroy ()
+    Category.executeUpdate("delete Category c")
 }

@@ -35,7 +35,7 @@ class UserDashboardControllerTests {
 		
 		//VERIFY
 		//objectServiceController.verify()
-		assertEquals(3, response.json.length())	
+		assertEquals(1, response.json.length())	
 	}
 
 	//TODO test only returns achievements within period range

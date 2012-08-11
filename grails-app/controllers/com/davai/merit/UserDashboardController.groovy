@@ -25,7 +25,7 @@ class UserDashboardController {
     }
 
 	def userBreadthChartData() {
-   		def results = [[label:"Java",value:"3"],[label:"Database",value:"2"],[label:"Release",value:"7"]]
+   		def results = [[label:"Manufacturing",value:"1"]]
    
 		render(contentType: "text/json") {
 			return results
