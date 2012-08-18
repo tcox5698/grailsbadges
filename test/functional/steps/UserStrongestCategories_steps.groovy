@@ -10,21 +10,13 @@ def expected
 def user
 def objectService
 
-Given(~/^I have achievement "([^"]*)" in category "([^"]*)"$/) { String arg1, String arg2 ->
-	user = giveUser()
-	expected = [[label:arg2,value:1]]
-}
 When(~/^I display my strongest categories$/) { ->
 	userDashboardController = new UserDashboardController()
+	userDashboardController.springSecurityService = [currentUser:user]
 	userDashboardController.userBreadthChartData()
 	results = userDashboardController.response.json
-}
-Then(~/^I see "([^"]*)"$/) { String arg1 ->
-	//assert "nancy" == results.class.name
-	assert 1 == results.length()
-	def actual = results.getJSONObject(0)
-	assert actual.value == "1"
-	assert actual.label == arg1
+	
+	System.out.println("breadth chart data:" + results)
 }
 
 Given(~/^I have the following achievements$/) { Object dataTable ->
@@ -41,6 +33,8 @@ Given(~/^I have the following achievements$/) { Object dataTable ->
 	}
 }
 Then(~/^I see the following in the chart$/) { Object dataTable ->
+	System.out.println("lost results?: " + results)
+
 	List<Map<String, String>> expectedRows = dataTable.asMaps()
 	def expectedMap = [:]
 	def actualMap = [:]
@@ -49,13 +43,15 @@ Then(~/^I see the following in the chart$/) { Object dataTable ->
 		expectedMap.put(row.get("Category"), row.get("SkillPoints"))
 	}
 	
-	for (int i = 0; i < results.length(); i++) {
-		def result = results.getJSONObject(i)
-		actualMap.put(result.label, result.value)
+	System.out.println ("now results class is: " + results.getClass().name)
+	System.out.println ("now results length: " + results.length())
+	System.out.println("result names: " + results.names)
+	
+	results.keys.each() {
+		actualMap.put(it, results.get(it))
 	}
 	
 	assert expectedMap.equals(actualMap)
-
 }
 
 def giveUnlockedAchievement(String achievementName, Person user, Category category, SkillLevel level) {

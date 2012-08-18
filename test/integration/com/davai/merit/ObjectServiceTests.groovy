@@ -14,6 +14,22 @@ class ObjectServiceTests {
 	}
 	
 	@Test
+	void testFreeFormQueryWithParams() {
+		def category = this.objectHive.provideCategories(["Bob"])[0]
+		def otherCategory = this.objectHive.provideCategories(["Nancy"])[0]
+		
+		//EXECUTE
+		def results = objectService.select("select c.name \
+			from Category c\
+			where c.name = :name",[name:"Bob"])
+			
+		//VERIFY
+		assert results.size == 1
+		
+		assert results[0].equals("Bob")	
+	}
+	
+	@Test
 	void testFreeFormQuery() {
 		def category = this.objectHive.provideCategories(["Bob"])[0]		
 		assert null != category

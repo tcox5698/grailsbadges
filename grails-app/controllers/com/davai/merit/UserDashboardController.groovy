@@ -24,9 +24,39 @@ class UserDashboardController {
     	render view:"index", model: [unlockedAchievements: unlockedAchievements]	
     }
 
+	//tests of this have to hit database for useful assertion of correctness
+	//move it and subclass knows datastructure of report, not this class
+	//could make a jsonreportclass....
 	def userBreadthChartData() {
-   		def results = [[label:"Manufacturing",value:"1"]]
+	    def person = springSecurityService.currentUser
+	    def results = [:]
+   		
+   		def queryResults = objectService.select('''
+			select c.name, count(u.id) * max(s.multiplier)  as points
+			from UnlockedAchievement u
+				left join u.categories as c
+				left join u.skillLevel as s
+			where
+				u.person = :person
+			group by 
+				c.name
+			order by 
+				points desc   		
+   		''',[person:person])
+   		
+   		System.out.println("got queryresults!: " + queryResults)
+   		
+   		System.out.println("queryresults class: " + queryResults.class.name)
    
+   		queryResults.each() {
+   			System.out.println("dealing with row: " + it)
+   			def catname = it[0]
+   			def value = it[1]
+   			results.put(catname, value)
+   			
+   			System.out.println("just popped results: " + results)
+   		}
+   		   
 		render(contentType: "text/json") {
 			return results
 		}     

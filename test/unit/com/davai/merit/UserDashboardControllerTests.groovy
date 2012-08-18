@@ -30,6 +30,15 @@ class UserDashboardControllerTests {
     }
 
 	void testUserBreadthChartData_ForOneAchievement() {
+    	objectServiceController.demand.select(1) {queryString, arguments ->
+    		assert "bob".equals(queryString)
+    		assert "bingo".equals(arguments.person)
+    	
+			return ["Sally","Arnold"]
+    	} 	
+	
+	    controller.objectService = objectServiceController.createMock()
+	    
 		//EXECUTE
 		controller.userBreadthChartData()
 		

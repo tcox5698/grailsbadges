@@ -13,16 +13,6 @@ def class ObjectHive {
 		}
 	}
 
-	def provideUnlockedAchievements(int count = 1) {
-		def person = providePeople(1)[0]
-		
-		def achv = provideUnlockedAchievements(count, person)
-		
-		assert null!= achv
-		
-		return achv
-	}
-
 	def provideCategories(names) {
 		def list = []
 		names.each{
@@ -53,7 +43,11 @@ def class ObjectHive {
 	}
 
 	def provideSkillLevels(int count = 1) {
-		def list = []
+		def list = SkillLevel.list()
+		
+		if (!list.isEmpty()) {
+			return list[0..count]
+		}
 	
 		for (i in 0..count) {
 			def skillLevel = new SkillLevel(
@@ -70,7 +64,15 @@ def class ObjectHive {
 		return list
 	}
 	
-	def provideUnlockedAchievements(int count = 1, Person person ) {
+	def provideUnlockedAchievements(int count = 1) {	
+		def skillLevel = provideSkillLevels()[0]
+		skillLevel.save(flush:true)
+		def category = provideCategories()[0]
+		def person = providePeople()[0]
+		return provideUnlockedAchievements(count, person, category, skillLevel)
+	}
+	
+	def provideUnlockedAchievements(int count = 1, Person person, Category category, SkillLevel level ) {
 		def counter = 0
 		def list = []
 		
@@ -82,10 +84,12 @@ def class ObjectHive {
 			incrementer++
         	def achievement = new UnlockedAchievement(
 				person: person,
+				skillLevel: level,
 				messageKey: "test.achievement.key" + incrementer,
 				messageArguments: "args" + incrementer,
 				unlockedDate: new java.util.Date()
         	)
+        	achievement.addToCategories(category)
         	validateIt(achievement)
         	achievement.save(flush:flush)
         	assert achievement

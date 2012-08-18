@@ -2,7 +2,7 @@ package com.davai.merit.criteria
 
 public class Criteria {
 	def maxResults
-	def arguments
+	def arguments = [:]
 	def queryString	
 
 	final def find() {
