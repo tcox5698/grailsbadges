@@ -4,7 +4,7 @@ import static org.junit.Assert.*
 import org.junit.*
 import com.davai.merit.criteria.*
 
-class ObjectServiceTests {
+class ObjectServiceTests extends GroovyTestCase {
 	def objectService
 	def objectHive
 	

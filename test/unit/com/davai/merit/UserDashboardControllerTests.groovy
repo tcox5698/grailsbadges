@@ -20,7 +20,7 @@ class UserDashboardControllerTests {
 	@Before
     void setUp() {
 		objectServiceController = mockFor(ObjectService)
-		hive = new ObjectHive()
+		hive = new ObjectHive(flush:false)
 		
 		inputPerson = new Person(name: "inputName",email:"inputEmail")
 		returnedPerson = new Person(name: "returnPerson", email:"returnEmail")
@@ -30,9 +30,8 @@ class UserDashboardControllerTests {
     }
 
 	void testUserBreadthChartData_ForOneAchievement() {
-    	objectServiceController.demand.select(1) {queryString, arguments ->
-    		assert "bob".equals(queryString)
-    		assert "bingo".equals(arguments.person)
+    	objectServiceController.demand.find(1) {CategoryStrengthChartCriteria chartCriteria, arguments ->
+    		assertEquals(["person":inputPerson],achievementCriteria.arguments)
     	
 			return ["Sally","Arnold"]
     	} 	
@@ -99,7 +98,7 @@ class UserDashboardControllerTests {
 		response.json.eachWithIndex{it, i ->
 			def expectedLabel = i==0 || i == response.json.size() -1 ? dateFormat.format(expectedDate+n):""		
 			assertEquals(expectedLabel, it.label)
-			assertEquals("failed on run: " + n + "full json: " + response.json, expectedRunningTotals[n], it.value)
+			assertEquals("failed on run: " + n + "; full json: " + response.json, expectedRunningTotals[n], it.value)
 
 			n++
 		}

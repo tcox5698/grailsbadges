@@ -31,19 +31,7 @@ class UserDashboardController {
 	    def person = springSecurityService.currentUser
 	    def results = [:]
    		
-   		def queryResults = objectService.select('''
-			select c.name, count(u.id) * max(s.multiplier)  as points
-			from UnlockedAchievement u
-				left join u.categories as c
-				left join u.skillLevel as s
-			where
-				u.person = :person
-			group by 
-				c.name
-			order by 
-				points desc   		
-   		''',[person:person])
-   		
+   		def queryResults = objectService.find(new CategoryStrengthChartCriteria(arguments:[person:person]))
    		System.out.println("got queryresults!: " + queryResults)
    		
    		System.out.println("queryresults class: " + queryResults.class.name)

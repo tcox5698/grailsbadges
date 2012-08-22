@@ -24,7 +24,9 @@ def class ObjectHive {
 	def createCategory(name) {
 		def category = new Category(name: name)
 		//validateIt(category)
-		category.save(flush:flush, validate:false)
+		if (flush) {
+			category.save(flush:flush, validate:false)
+		}
 		assert category
         return category
 	}
@@ -42,14 +44,21 @@ def class ObjectHive {
 		return list		
 	}
 
-	def provideSkillLevels(int count = 1) {
+	def provideSkillLevels(int want = 1) {
 		def list = SkillLevel.list()
-		
+		def have = 0
+				
 		if (!list.isEmpty()) {
-			return list[0..count]
+			log.trace " some skills exist: " + list					
+			if (list.size() >= want) {
+				return list[0..want]
+			}
+			have = list.size()
 		}
+		
+		list = []
 	
-		for (i in 0..count) {
+		for (i in have..want) {
 			def skillLevel = new SkillLevel(
 				name: "skill" + i,
 				description:"skillDescription" + i,
@@ -64,13 +73,14 @@ def class ObjectHive {
 		return list
 	}
 	
-	def provideUnlockedAchievements(int count = 1) {	
-		def skillLevel = provideSkillLevels()[0]
-		skillLevel.save(flush:true)
-		def category = provideCategories()[0]
+	def provideUnlockedAchievements(int want = 1) {	
 		def person = providePeople()[0]
-		return provideUnlockedAchievements(count, person, category, skillLevel)
+		return provideUnlockedAchievements(want, person)
 	}
+	
+	def provideUnlockedAchievements(int count = 1, Person person) {	
+		return provideUnlockedAchievements(count, person, null, null)
+	}	
 	
 	def provideUnlockedAchievements(int count = 1, Person person, Category category, SkillLevel level ) {
 		def counter = 0
@@ -89,7 +99,9 @@ def class ObjectHive {
 				messageArguments: "args" + incrementer,
 				unlockedDate: new java.util.Date()
         	)
-        	achievement.addToCategories(category)
+        	if (null != category) {
+	        	achievement.addToCategories(category)
+	        }
         	validateIt(achievement)
         	achievement.save(flush:flush)
         	assert achievement
