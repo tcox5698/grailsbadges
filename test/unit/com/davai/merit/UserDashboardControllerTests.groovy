@@ -30,10 +30,13 @@ class UserDashboardControllerTests {
     }
 
 	void testUserBreadthChartData_ForOneAchievement() {
-    	objectServiceController.demand.find(1) {CategoryStrengthChartCriteria chartCriteria, arguments ->
-    		assertEquals(["person":inputPerson],achievementCriteria.arguments)
+		def expectedCategoryName = "BonkerCategory"
+		def expectedCategoryValue = 11
+	
+    	objectServiceController.demand.find(1) {CategoryStrengthChartCriteria chartCriteria ->
+    		assertEquals(["person":inputPerson],chartCriteria.arguments)
     	
-			return ["Sally","Arnold"]
+			return [[expectedCategoryName,expectedCategoryValue]]
     	} 	
 	
 	    controller.objectService = objectServiceController.createMock()
@@ -43,7 +46,12 @@ class UserDashboardControllerTests {
 		
 		//VERIFY
 		//objectServiceController.verify()
-		assertEquals(1, response.json.length())	
+		assert 1 == response.json.length()
+		
+		response.json.eachWithIndex{it, i ->
+			assert expectedCategoryName.equals(it.key)
+			assert "; full json: " + response.json, expectedCategoryValue == it.value
+		}		
 	}
 
 	//TODO test only returns achievements within period range

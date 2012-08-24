@@ -82,6 +82,14 @@ def class ObjectHive {
 		return provideUnlockedAchievements(count, person, null, null)
 	}	
 	
+	def provideUnlockedAchievementsFull(int want = 1) {
+		def person = providePeople()[0]
+		def category = provideCategories(1)[0]
+		def level = provideSkillLevels(1)[0]
+	
+		return provideUnlockedAchievements(want, person, category, level)
+	}
+	
 	def provideUnlockedAchievements(int count = 1, Person person, Category category, SkillLevel level ) {
 		def counter = 0
 		def list = []

@@ -29,18 +29,19 @@ class UserDashboardController {
 	//could make a jsonreportclass....
 	def userBreadthChartData() {
 	    def person = springSecurityService.currentUser
-	    def results = [:]
+	    def results = []
    		
    		def queryResults = objectService.find(new CategoryStrengthChartCriteria(arguments:[person:person]))
    		System.out.println("got queryresults!: " + queryResults)
    		
-   		System.out.println("queryresults class: " + queryResults.class.name)
+   		System.out.println("queryresults class: " + queryResults.class)
    
    		queryResults.each() {
-   			System.out.println("dealing with row: " + it)
-   			def catname = it[0]
-   			def value = it[1]
-   			results.put(catname, value)
+   			System.out.println("dealing with map row: " + it)
+   			   			System.out.println("dealing with map row class: " + it.class.name)
+   			def catname = it.key
+   			def value = it.value
+   			results.add([label:catname,value:value])
    			
    			System.out.println("just popped results: " + results)
    		}

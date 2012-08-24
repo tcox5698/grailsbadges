@@ -36,22 +36,26 @@ Then(~/^I see the following in the chart$/) { Object dataTable ->
 	System.out.println("lost results?: " + results)
 
 	List<Map<String, String>> expectedRows = dataTable.asMaps()
-	def expectedMap = [:]
-	def actualMap = [:]
+	def expectedListOfMaps = []
+	def actualListOfMaps = []
 	
 	for (row in expectedRows) {
-		expectedMap.put(row.get("Category"), row.get("SkillPoints"))
+		expectedListOfMaps.add([label:row.get("Category"), value:row.get("SkillPoints")])
 	}
 	
 	System.out.println ("now results class is: " + results.getClass().name)
 	System.out.println ("now results length: " + results.length())
-	System.out.println("result names: " + results.names)
+	System.out.println("result keys: " + results.values)
 	
-	results.keys.each() {
-		actualMap.put(it, results.get(it))
+	results.each() {
+		actualListOfMaps.add(label:it.label, value:it.value)
 	}
 	
-	assert expectedMap.equals(actualMap)
+	assert expectedListOfMaps.size() == actualListOfMaps.size()
+	expectedListOfMaps.eachWithIndex(){it, i ->
+		assert it.label.equals(actualListOfMaps.get(i).label)
+		assert String.valueOf(it.value).equals(String.valueOf(actualListOfMaps.get(i).value))		
+	}
 }
 
 def giveUnlockedAchievement(String achievementName, Person user, Category category, SkillLevel level) {

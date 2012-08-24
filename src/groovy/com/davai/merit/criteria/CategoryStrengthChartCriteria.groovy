@@ -8,12 +8,15 @@ import com.davai.merit.*
 	[[categoryName:pointValue],[categoryName:pointValue]]
 */
 public class CategoryStrengthChartCriteria extends Criteria {
-	def whereClause = " where u.person = :person "
+	def whereClause = " and u.person = :person "
 	def hardQueryString = """
 			select c.name, count(u.id) * max(s.multiplier)  as points
 			from UnlockedAchievement u
 				left join u.categories as c
 				left join u.skillLevel as s
+			where			
+				c is not null
+			
 			${writer -> 
 				writer << this.whereClause
 			}
@@ -29,7 +32,7 @@ public class CategoryStrengthChartCriteria extends Criteria {
 		def results = [:]
 		
 		queryResults.each() {
-   			System.out.println("dealing with row: " + it)
+   			System.out.println("dealing with hql row: " + it)
    			def catname = it[0]
    			def value = it[1]
    			results.put(catname, value)
@@ -45,7 +48,7 @@ public class CategoryStrengthChartCriteria extends Criteria {
 		def results = [:]
 		
 		queryResults.each() {
-   			System.out.println("dealing with row: " + it)
+   			System.out.println("dealing with hql row: " + it)
    			def catname = it[0]
    			def value = it[1]
    			results.put(catname, value)

@@ -13,7 +13,7 @@ class CategoryStrengthChartCriteriaTests extends GroovyTestCase {
 	}
 	
 	void testFindAll() {
-		def achievement = objectHive.provideUnlockedAchievements()[0]
+		def achievement = objectHive.provideUnlockedAchievementsFull()[0]
 		        
         def chartCriteria = new CategoryStrengthChartCriteria()
         
@@ -27,8 +27,8 @@ class CategoryStrengthChartCriteriaTests extends GroovyTestCase {
 	}
 	
 	void testFindForPerson() {
-		def achievement1 = objectHive.provideUnlockedAchievements()[0]
-		def achievement2 = objectHive.provideUnlockedAchievements()[0]
+		def achievement1 = objectHive.provideUnlockedAchievementsFull()[0]
+		def achievement2 = objectHive.provideUnlockedAchievementsFull()[0]
 		
 		assert !achievement1.person.name.equals(achievement2.person.name)
 		
