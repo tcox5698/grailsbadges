@@ -35,8 +35,10 @@ class UserDashboardControllerTests {
 	
     	objectServiceController.demand.find(1) {CategoryStrengthChartCriteria chartCriteria ->
     		assertEquals(["person":inputPerson],chartCriteria.arguments)
+    		def mapRow = new HashMap()
+    		mapRow.put(expectedCategoryName, expectedCategoryValue)
     	
-			return [[expectedCategoryName,expectedCategoryValue]]
+			return mapRow
     	} 	
 	
 	    controller.objectService = objectServiceController.createMock()
@@ -49,7 +51,7 @@ class UserDashboardControllerTests {
 		assert 1 == response.json.length()
 		
 		response.json.eachWithIndex{it, i ->
-			assert expectedCategoryName.equals(it.key)
+			assert expectedCategoryName.equals(it.label)
 			assert "; full json: " + response.json, expectedCategoryValue == it.value
 		}		
 	}

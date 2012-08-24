@@ -38,7 +38,7 @@ class UserDashboardController {
    
    		queryResults.each() {
    			System.out.println("dealing with map row: " + it)
-   			   			System.out.println("dealing with map row class: " + it.class.name)
+   			System.out.println("dealing with map row class: " + it.getClass())   			
    			def catname = it.key
    			def value = it.value
    			results.add([label:catname,value:value])
