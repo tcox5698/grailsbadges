@@ -42,6 +42,7 @@ class UserDashboardController {
    		   
 		render(contentType: "text/json") {
 			if (results.isEmpty()) {
+				results.add([label:"No Categorized Achievements",value:0])
 				return results
 			}
 		

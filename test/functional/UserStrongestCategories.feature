@@ -42,3 +42,4 @@ Scenario: New user with no achievements
 	When I display my strongest categories
 	Then I see the following in the chart
 	| Category			| SkillPoints	|
+	| No Categorized Achievements | 0   |
