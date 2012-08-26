@@ -32,12 +32,9 @@ public class CategoryStrengthChartCriteria extends Criteria {
 		def results = [:]
 		
 		queryResults.each() {
-   			System.out.println("dealing with hql row: " + it)
    			def catname = it[0]
    			def value = it[1]
    			results.put(catname, value)
-   			
-   			System.out.println("just popped results: " + results)
    		}
 		
 		return results
@@ -48,12 +45,9 @@ public class CategoryStrengthChartCriteria extends Criteria {
 		def results = [:]
 		
 		queryResults.each() {
-   			System.out.println("dealing with hql row: " + it)
    			def catname = it[0]
    			def value = it[1]
    			results.put(catname, value)
-   			
-   			System.out.println("just popped results: " + results)
    		}
 		
 		return results

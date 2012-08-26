@@ -14,24 +14,27 @@ Scenario: Two achievements in two categories shows me both categories on the Das
 	| Manufacturing	| 1				|
 	| Engineering  	| 3				|
 	
-Scenario: Multiple achievements in more than 5 categories shows me the top 5 categories on the Dashboard in order of Strength and then Alphabetically.
+Scenario: Multiple achievements in more than 5 categories.
 	Given I have the following achievements
 	| Name 			| SkillLevelMultiplier 	| 	Category 		|
-	| Designed Car 	| 3						|	Engineering 	|
+	| Read Java code 	| 1						|	Java 	|	
+	| Saw Javascript Presentation 	| 1						|	JavaScript 	|		
+	| Examined database schema | 1			|   Database		|
+	| Designed Car 	| 4						|	Engineering 	|
 	| Built Car		| 1						|	Manufacturing 	|
 	| Recycled Car	| 1						|	Manufacturing 	|
 	| Cleaned Car 	| 3						|	Service 		|
-	| Fixed Car		| 1						|	Service	 		|
+	| Fixed Car		| 3						|	Service	 		|
 	| Delivered Car	| 3						|	Delivery 		|
 	| Marketed Car	| 1						|	Marketing 		|
-	| Sold Car 	    | 3						|	Sales 			|
+	| Sold Car 	    | 5						|	Sales 			|
 	When I display my strongest categories	
 	Then I see the following in the chart
 	| Category			| SkillPoints	|
 	|	Manufacturing 	|	2			|
 	|	Delivery 		|	3			|
-	|	Engineering 	|	3			|
-	|	Sales	 		|	3			|
-	|	Service 		|	4			|	
+	|	Engineering 	|	4			|
+	|	Sales	 		|	5			|
+	|	Service 		|	6			|	
 	
 	

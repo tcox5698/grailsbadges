@@ -24,26 +24,16 @@ class UserDashboardController {
     	render view:"index", model: [unlockedAchievements: unlockedAchievements]	
     }
 
-	//tests of this have to hit database for useful assertion of correctness
-	//move it and subclass knows datastructure of report, not this class
-	//could make a jsonreportclass....
-	def userBreadthChartData() {
+	def userStrengthsChartData() {
 	    def person = springSecurityService.currentUser
 	    def results = []
    		
    		def queryResults = objectService.find(new CategoryStrengthChartCriteria(arguments:[person:person]))
-   		System.out.println("got queryresults!: " + queryResults)
-   		
-   		System.out.println("queryresults class: " + queryResults.class)
    
    		queryResults.each() {
-   			System.out.println("dealing with map row: " + it)
-   			System.out.println("dealing with map row class: " + it.getClass())   			
    			def catname = it.key
    			def value = it.value
-   			results.add([label:catname,value:value])
-   			
-   			System.out.println("just popped results: " + results)
+   			results.add([label:catname,value:value])   			
    		}
    		
    		results.sort{a, b ->
@@ -51,9 +41,8 @@ class UserDashboardController {
    		}
    		   
 		render(contentType: "text/json") {
-			def start = results.size()<5?0:1
-			def end = Math.min(results.size()-1,5)
-			System.out.println("getting subset from " + start + " to " + end)
+			def start = results.size()<5?0:results.size() - 5
+			def end = results.size() - 1
 			return results[start..end]
 		}     
     }

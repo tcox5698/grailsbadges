@@ -13,10 +13,8 @@ def objectService
 When(~/^I display my strongest categories$/) { ->
 	userDashboardController = new UserDashboardController()
 	userDashboardController.springSecurityService = [currentUser:user]
-	userDashboardController.userBreadthChartData()
+	userDashboardController.userStrengthsChartData()
 	results = userDashboardController.response.json
-	
-	System.out.println("breadth chart data:" + results)
 }
 
 Given(~/^I have the following achievements$/) { Object dataTable ->
@@ -29,12 +27,9 @@ Given(~/^I have the following achievements$/) { Object dataTable ->
 		def category = giveCategory(row.get("Category"))
 		def skillLevel = giveSkillLevel(row.get("SkillLevelMultiplier"))
 		def achievement = giveUnlockedAchievement(achievementName, user, [category], skillLevel)
-		System.out.println("createdAchievement!:" + achievement)
 	}
 }
 Then(~/^I see the following in the chart$/) { Object dataTable ->
-	System.out.println("lost results?: " + results)
-
 	List<Map<String, String>> expectedRows = dataTable.asMaps()
 	def expectedListOfMaps = []
 	def actualListOfMaps = []
@@ -42,10 +37,6 @@ Then(~/^I see the following in the chart$/) { Object dataTable ->
 	for (row in expectedRows) {
 		expectedListOfMaps.add([label:row.get("Category"), value:row.get("SkillPoints")])
 	}
-	
-	System.out.println ("now results class is: " + results.getClass().name)
-	System.out.println ("now results length: " + results.length())
-	System.out.println("result keys: " + results.values)
 	
 	results.each() {
 		actualListOfMaps.add(label:it.label, value:it.value)
@@ -95,7 +86,6 @@ def giveSkillLevel(String skillLevelMultiplier) {
 		arguments:[multiplier: multiplierInt]))
 	
 	if (level) {
-		System.out.println("level exists: " + level)
 		return level[0]
 	}
 	
@@ -107,7 +97,6 @@ def giveSkillLevel(String skillLevelMultiplier) {
 	))
 	
 	assert level != null
-	System.out.println("created skill level: " + level)
 	return level
 }
 
@@ -118,12 +107,10 @@ def giveCategory(String categoryName) {
 	))
 	
 	if (exists.size() > 0) {
-		System.out.println("category exists?" + exists)
 		return exists[0]
 	}
 
 	exists = objectService.save(new Category(name:categoryName))
-	System.out.println("created category:" + exists)		
 	
 	return exists
 }

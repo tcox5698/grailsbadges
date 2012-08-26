@@ -29,7 +29,7 @@ class UserDashboardControllerTests {
     			
     }
 
-	void testUserBreadthChartData_ForOneAchievement() {
+	void testUserStrengthsChartData_ForOneAchievement() {
 		def expectedCategoryName = "BonkerCategory"
 		def expectedCategoryValue = 11
 	
@@ -44,7 +44,7 @@ class UserDashboardControllerTests {
 	    controller.objectService = objectServiceController.createMock()
 	    
 		//EXECUTE
-		controller.userBreadthChartData()
+		controller.userStrengthsChartData()
 		
 		//VERIFY
 		//objectServiceController.verify()

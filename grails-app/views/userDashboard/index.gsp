@@ -29,9 +29,9 @@
   	</div> <!-- end row-fluid-->    
   	<div class="row-fluid dashRow"> 		
   		<div class="span6 dashCell">  	
-			<h2><g:message code="label.progress.in.depth" default="Achievement in Breadth"/></h2>  		
+			<h2><g:message code="label.progress.in.depth" default="Top Five Strengths"/></h2>  		
 			<div id="outerDiv" style="width:400px;height:250px">
-				<div class="chartDiv" id="breadthChart">
+				<div class="chartDiv" id="strengthsChart">
 				</div>
 			</div>
 
@@ -47,18 +47,18 @@
 	jQuery.noConflict();
 	jQuery(function() {	
 		doPlotProgress();
-		doPlotBreadth();
+		doPlotStrengths();
 	});			
 	
-	function doPlotBreadth() {
+	function doPlotStrengths() {
 		var options = {};
 				options.data = [];
 				options.labels = [];
 				options.containerDivId = 'outerDiv';
-				options.chartDivId = 'breadthChart';
+				options.chartDivId = 'strengthsChart';
 				options.chartType = 'bar';
 			
-					{jQuery.getJSON("${createLink(uri:'/userDashboard/userBreadthChartData')}", function(data) {
+					{jQuery.getJSON("${createLink(uri:'/userDashboard/userStrengthsChartData')}", function(data) {
 						jQuery.each(data,function(i, item){
 								this.data.push(item.value);
 								this.labels.push(item.label);
