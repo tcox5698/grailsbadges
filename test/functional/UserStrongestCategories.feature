@@ -37,4 +37,8 @@ Scenario: Multiple achievements in more than 5 categories.
 	|	Sales	 		|	5			|
 	|	Service 		|	6			|	
 	
-	
+Scenario: New user with no achievements	
+	Given I am a new user with no achievements
+	When I display my strongest categories
+	Then I see the following in the chart
+	| Category			| SkillPoints	|

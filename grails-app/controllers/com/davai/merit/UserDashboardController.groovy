@@ -41,6 +41,10 @@ class UserDashboardController {
    		}
    		   
 		render(contentType: "text/json") {
+			if (results.isEmpty()) {
+				return results
+			}
+		
 			def start = results.size()<5?0:results.size() - 5
 			def end = results.size() - 1
 			return results[start..end]

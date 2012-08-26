@@ -29,6 +29,22 @@ Given(~/^I have the following achievements$/) { Object dataTable ->
 		def achievement = giveUnlockedAchievement(achievementName, user, [category], skillLevel)
 	}
 }
+
+Given(~/^I am a new user with no achievements$/) { ->
+	user = giveUser()
+	
+	objectService = appCtx.getBean("objectService")
+	
+    def achievements = objectService.find(new UnlockedAchievementCriteria(
+    	queryString: "from UnlockedAchievement u "
+    		+ " where u.person = :person ",
+    	arguments:[person:user]
+    ))	
+    
+    assert achievements.isEmpty()
+}
+
+
 Then(~/^I see the following in the chart$/) { Object dataTable ->
 	List<Map<String, String>> expectedRows = dataTable.asMaps()
 	def expectedListOfMaps = []
