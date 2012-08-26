@@ -28,7 +28,7 @@ Given(~/^I have the following achievements$/) { Object dataTable ->
 		def achievementName = row.get("Name")
 		def category = giveCategory(row.get("Category"))
 		def skillLevel = giveSkillLevel(row.get("SkillLevelMultiplier"))
-		def achievement = giveUnlockedAchievement(achievementName, user, category, skillLevel)
+		def achievement = giveUnlockedAchievement(achievementName, user, [category], skillLevel)
 		System.out.println("createdAchievement!:" + achievement)
 	}
 }
@@ -58,21 +58,28 @@ Then(~/^I see the following in the chart$/) { Object dataTable ->
 	}
 }
 
-def giveUnlockedAchievement(String achievementName, Person user, Category category, SkillLevel level) {
+def giveUnlockedAchievement(String achievementName, Person user, categories, SkillLevel level) {
     def achievement = objectService.find(new UnlockedAchievementCriteria(
-    	queryString: "from UnlockedAchievement u left join u.categories as c "
-    		+ " where u.person = :person and c.name = :categoryName and u.skillLevel = :skillLevel ",
-    	arguments:[person:user,categoryName:category.name,skillLevel:level]
+    	queryString: "from UnlockedAchievement u "
+    		+ " where u.person = :person and u.skillLevel = :skillLevel and u.name = :achievementName",
+    	arguments:[person:user,skillLevel:level,achievementName:achievementName]
     ))
     
     if (!achievement) {
     	achievement = objectService.save(new UnlockedAchievement(
 			person: user,
-			categories: [category],
+			categories: categories,
 			skillLevel: level,
 			name: achievementName,
 			unlockedDate: new java.util.Date()    		
     	))
+    } else {
+    	categories.each() {cat ->
+    		achievement.each() {achv ->
+    			System.out.println("achv: " + achv.getClass()) 
+	    		achv.addToCategories(cat)
+	    	}
+    	}
     }
     
 	assert achievement != null    
@@ -110,12 +117,13 @@ def giveCategory(String categoryName) {
 		arguments: [name:categoryName]
 	))
 	
-	System.out.println("category exists?" + exists)
-	
-	if (!exists) {
-		exists = objectService.save(new Category(name:categoryName))
-		System.out.println("created category:" + exists)		
+	if (exists.size() > 0) {
+		System.out.println("category exists?" + exists)
+		return exists[0]
 	}
+
+	exists = objectService.save(new Category(name:categoryName))
+	System.out.println("created category:" + exists)		
 	
 	return exists
 }

@@ -10,7 +10,7 @@ import com.davai.merit.*
 public class CategoryStrengthChartCriteria extends Criteria {
 	def whereClause = " and u.person = :person "
 	def hardQueryString = """
-			select c.name, count(u.id) * max(s.multiplier)  as points
+			select c.name, sum(s.multiplier)  as points
 			from UnlockedAchievement u
 				left join u.categories as c
 				left join u.skillLevel as s

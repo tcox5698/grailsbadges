@@ -45,9 +45,16 @@ class UserDashboardController {
    			
    			System.out.println("just popped results: " + results)
    		}
+   		
+   		results.sort{a, b ->
+   			a.value == b.value ? a.label.compareTo(b.label) : (a.value < b.value? -1:(a.value > b.value? 1: 0))
+   		}
    		   
 		render(contentType: "text/json") {
-			return results
+			def start = results.size()<5?0:1
+			def end = Math.min(results.size()-1,5)
+			System.out.println("getting subset from " + start + " to " + end)
+			return results[start..end]
 		}     
     }
     
