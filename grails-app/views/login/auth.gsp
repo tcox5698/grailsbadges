@@ -14,6 +14,7 @@
 	<div class="sign-in">
 
 	<h1><g:message code='spring.security.ui.login.signin'/></h1>
+	<h2>Invitation only currently - watch the blog for grand opening!</h2>
 
 	<table>
 		<tr>
@@ -35,7 +36,7 @@
 		</tr>
 		<tr>
 			<td colspan='2'>
-				<s2ui:linkButton elementId='register' controller='register' messageCode='spring.security.ui.login.register'/>
+				<!--<s2ui:linkButton elementId='register' controller='register' messageCode='spring.security.ui.login.register'/>-->
 				<s2ui:submitButton elementId='loginButton' form='loginForm' messageCode='spring.security.ui.login.login'/>
 			</td>
 		</tr>

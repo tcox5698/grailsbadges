@@ -57,7 +57,10 @@
       
 		<footer class="container navbar navbar-fixed-top">
         <hr>
-		<p>&copy; Davai Midwest 2012 
+		<p>&copy; Davai Midwest 2012 | <a target="_blog"
+			href="http://davaimidwest.blogspot.com/search/label/Feature?view=sidebar">New Features!</a> | <a 
+			target="_blog"
+			href="http://davaimidwest.blogspot.com/?view=sidebar">Blog</a>
 		</p>
 		</footer>		
 		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
