@@ -22,10 +22,7 @@ class AchieveController {
 		def catNames = params.selectedCategories.split(',')
 		
 		catNames.each { catName ->
-			def categoryCriteria = new CategoryCriteria(
-				queryString: "from Category c where c.name = :name",
-				arguments: [name:catName]
-			)		
+			def categoryCriteria = new CategoryCriteria(arguments: [name:catName])		
 			
 			def category = objectService.find(categoryCriteria)[0]
 			
@@ -42,10 +39,8 @@ class AchieveController {
 	}
 
 	def categoryList() {		
-		def results = objectService.find(
-			new CategoryCriteria(
-				queryString:"from Category c where upper(c.name) like :name",
-				arguments:[name:"%" + params.term.toUpperCase() + "%"]))
+		def likeArguments = ["name":params.term]
+		def results = objectService.find(new CategoryCriteria(likeArgs:likeArguments))
 	
 		render(contentType: "text/json") {
 			def options = []

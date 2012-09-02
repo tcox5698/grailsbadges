@@ -84,8 +84,7 @@ class AchieveControllerUnitTests {
     	response.format = "json"
     	
     	objectServiceController.demand.find(1) {CategoryCriteria categoryCriteria ->
-    		assertEquals("from Category c where upper(c.name) like :name", categoryCriteria.queryString)
-    		assertEquals(["name":"%INPUTTERM%"],categoryCriteria.arguments)
+    		assertEquals(["name":inputCategorySearchTerm],categoryCriteria.likeArgs)
 			return expectedCategories
     	}
     	

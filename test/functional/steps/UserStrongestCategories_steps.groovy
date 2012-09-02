@@ -36,8 +36,6 @@ Given(~/^I am a new user with no achievements$/) { ->
 	objectService = appCtx.getBean("objectService")
 	
     def achievements = objectService.find(new UnlockedAchievementCriteria(
-    	queryString: "from UnlockedAchievement u "
-    		+ " where u.person = :person ",
     	arguments:[person:user]
     ))	
     
@@ -67,9 +65,7 @@ Then(~/^I see the following in the chart$/) { Object dataTable ->
 
 def giveUnlockedAchievement(String achievementName, Person user, categories, SkillLevel level) {
     def achievement = objectService.find(new UnlockedAchievementCriteria(
-    	queryString: "from UnlockedAchievement u "
-    		+ " where u.person = :person and u.skillLevel = :skillLevel and u.name = :achievementName",
-    	arguments:[person:user,skillLevel:level,achievementName:achievementName]
+    	arguments:[person:user,skillLevel:level,name:achievementName]
     ))
     
     if (!achievement) {
@@ -98,7 +94,6 @@ def giveSkillLevel(String skillLevelMultiplier) {
 	def multiplierInt = Integer.parseInt(skillLevelMultiplier)
 
 	def level = objectService.find(new SkillLevelCriteria(
-		queryString: "from SkillLevel s where s.multiplier = :multiplier ",
 		arguments:[multiplier: multiplierInt]))
 	
 	if (level) {
@@ -118,7 +113,6 @@ def giveSkillLevel(String skillLevelMultiplier) {
 
 def giveCategory(String categoryName) {
 	def exists = objectService.find(new CategoryCriteria(
-		queryString: "from Category c where c.name = :name",
 		arguments: [name:categoryName]
 	))
 	

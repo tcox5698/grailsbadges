@@ -4,12 +4,12 @@ import com.davai.merit.*
 
 public class LoginCountCriteria extends Criteria {
 
-	def doFindAll() {
-		return LoginCount.findAll()
+	def alias = "c"
+	def baseQuery = " from LoginCount ${this.alias} "
+	
+	Class<?> getDomainClass() {
+		return LoginCount.class
 	}
 	
-	def doFindAll(queryString, arguments) {
-		log.trace "finding: " + ["queryString":queryString,"arguments":arguments]
-		return LoginCount.findAll(queryString, arguments)
-	}
+
 }

@@ -10,13 +10,14 @@ class UserDashboardController {
 
     def index() { 
     	def person = springSecurityService.currentUser
-    	def arguments = [person:person]
+    	def arguments = ["person":person]
+   		def orderArgs = ["unlockedDate":"DESC"]
+
     	
     	def criteria = new UnlockedAchievementCriteria(
-    			queryString: "from UnlockedAchievement a where a.person = :person "
-    				+ " order by a.unlockedDate desc",
     			arguments:arguments,
-    			maxResults:4		
+    			maxResults:4,
+				orderArgs:orderArgs		
     	)
     	
     	def unlockedAchievements = objectService.find(criteria)
@@ -58,7 +59,6 @@ class UserDashboardController {
 		def dateFormat = DateFormat.getDateInstance(DateFormat.SHORT)		    	
     
     	def criteria = new UnlockedAchievementCriteria(
-    		queryString: "from UnlockedAchievement a where a.person = :person",
 			arguments: arguments
     	)
     	

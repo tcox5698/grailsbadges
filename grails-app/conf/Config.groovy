@@ -128,7 +128,8 @@ log4j = {
     //appenders {
     //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
     //}
-    warn   'com.davai.merit'
+    trace   'com.davai.merit',
+    	'com.davai.merit.criteria'
 
     error  'org.codehaus.groovy.grails.web.servlet',  //  controllers
            'org.codehaus.groovy.grails.web.pages', //  GSP

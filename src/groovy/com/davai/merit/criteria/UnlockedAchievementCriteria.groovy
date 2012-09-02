@@ -3,18 +3,10 @@ package com.davai.merit.criteria
 import com.davai.merit.*
 
 public class UnlockedAchievementCriteria extends Criteria {
+	def alias = "a"
+	def baseQuery = " from UnlockedAchievement ${this.alias} "
 	
-	def doFindAll() {		
-		return UnlockedAchievement.findAll([max:maxResults])
+	Class<?> getDomainClass() {
+		return UnlockedAchievement.class
 	}
-	
-	def doFindAll(queryString, arguments) {
-		log.trace "finding: " + ["queryString":queryString,"arguments":arguments,"maxResults":maxResults]
-		
-		def pagingParams = [:]
-		
-		if (maxResults) pagingParams.put('max', maxResults)
-		
-		return UnlockedAchievement.findAll(queryString, arguments, pagingParams)
-	}	
 }

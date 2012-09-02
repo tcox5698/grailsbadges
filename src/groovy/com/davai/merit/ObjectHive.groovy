@@ -51,14 +51,14 @@ def class ObjectHive {
 		if (!list.isEmpty()) {
 			log.trace " some skills exist: " + list					
 			if (list.size() >= want) {
-				return list[0..want]
+				return list[0..<want]
 			}
 			have = list.size()
 		}
 		
 		list = []
 	
-		for (i in have..want) {
+		for (i in have..<want) {
 			def skillLevel = new SkillLevel(
 				name: "skill" + i,
 				description:"skillDescription" + i,

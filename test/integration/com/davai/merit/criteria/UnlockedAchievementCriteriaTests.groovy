@@ -44,7 +44,6 @@ class UnlockedAchievementCriteriaTests extends GroovyTestCase {
 		}
 
         def unlockedCriteria = new UnlockedAchievementCriteria(
-        	queryString: "from UnlockedAchievement a where a.person = :person",
         	arguments: [person: existingPerson])
         
 		//EXECUTE
@@ -65,7 +64,6 @@ class UnlockedAchievementCriteriaTests extends GroovyTestCase {
 		}
 
         def unlockedCriteria = new UnlockedAchievementCriteria(
-        	queryString: "from UnlockedAchievement a where a.person = :person",
         	arguments: [person: existingPerson],
         	maxResults: 2)
         
@@ -80,4 +78,54 @@ class UnlockedAchievementCriteriaTests extends GroovyTestCase {
  		assertEquals(2, achievements.size())
  		assertEquals(unlockedAchievements[0].messageKey, achievements[0].messageKey)
 	}
+	
+	void testOrderByUnlockedDateDesc() {
+		def expectedAchievements = objectHive.provideUnlockedAchievements(10)
+		
+		def unlockedCriteria = new UnlockedAchievementCriteria(
+			orderArgs:["unlockedDate":"DESC"])
+			
+		//EXECUTE
+		def actualAchievements = objectService.find(unlockedCriteria)
+		
+		//VERIFY
+		assert actualAchievements.size() == 10
+		
+		def previousDate
+		def gotOne
+		actualAchievements.each() {it ->
+			if (previousDate != null) {
+				gotOne = true
+				assert previousDate > it.unlockedDate
+			}
+			previousDate = it.unlockedDate
+		}
+		
+		assert gotOne
+	}
+	
+	void testOrderByUnlockedDateAsc() {
+		def expectedAchievements = objectHive.provideUnlockedAchievements(10)
+		
+		def unlockedCriteria = new UnlockedAchievementCriteria(
+			orderArgs:["unlockedDate":"ASC"])
+			
+		//EXECUTE
+		def actualAchievements = objectService.find(unlockedCriteria)
+		
+		//VERIFY
+		assert actualAchievements.size() == 10
+		
+		def previousDate
+		def gotOne
+		actualAchievements.each() {it ->
+			if (previousDate != null) {
+				gotOne = true
+				assert previousDate < it.unlockedDate
+			}
+			previousDate = it.unlockedDate
+		}
+		
+		assert gotOne
+	}	
 }

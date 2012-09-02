@@ -32,7 +32,6 @@ class CategoryServiceTests {
     		,"Ruby on Rails"])      		    	
     	
 		objectServiceController.demand.find(1) { CategoryCriteria categoryCriteria ->
-    		assertEquals("from Category c", categoryCriteria.queryString)
     		log.info "mock returning cats: " + expectedCategories
     		return expectedCategories
 		}  	

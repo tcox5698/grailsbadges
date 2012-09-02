@@ -76,7 +76,7 @@ class CategoryService {
 	
 
     def suggestCategories(strings) {
-    	def cats = objectService.find(new CategoryCriteria(queryString:"from Category c"))
+    	def cats = objectService.find(new CategoryCriteria())
 
 		return filterCats(cats, strings)		
     }

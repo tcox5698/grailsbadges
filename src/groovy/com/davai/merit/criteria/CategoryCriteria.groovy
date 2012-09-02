@@ -3,13 +3,11 @@ package com.davai.merit.criteria
 import com.davai.merit.*
 
 public class CategoryCriteria extends Criteria {
-
-	def doFindAll() {
-		return Category.findAll()
-	}
+	def alias = "c"
+	def baseQuery = " from Category ${this.alias} "
 	
-	def doFindAll(queryString, arguments) {
-		log.trace "finding: " + ["queryString":queryString,"arguments":arguments]
-		return Category.findAll(queryString, arguments)
+	Class<?> getDomainClass() {
+		return Category.class
 	}
+
 }

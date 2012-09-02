@@ -9,7 +9,7 @@ import com.davai.merit.*
 */
 public class CategoryStrengthChartCriteria extends Criteria {
 	def whereClause = " and u.person = :person "
-	def hardQueryString = """
+	def baseQuery = """
 			select c.name, sum(s.multiplier)  as points
 			from UnlockedAchievement u
 				left join u.categories as c
@@ -25,23 +25,13 @@ public class CategoryStrengthChartCriteria extends Criteria {
 			order by 
 				points desc   		
    		"""
-
-	def doFindAll() {
-		whereClause = ""
-		def queryResults = Category.executeQuery(hardQueryString, arguments)
-		def results = [:]
-		
-		queryResults.each() {
-   			def catname = it[0]
-   			def value = it[1]
-   			results.put(catname, value)
-   		}
-		
-		return results
-	}
 	
-	def doFindAll(queryString, arguments) {	
-		def queryResults = Category.executeQuery(hardQueryString, arguments)
+	def find() {
+		if (arguments.isEmpty()) {
+			whereClause = ""
+		}
+		
+		def queryResults = Category.executeQuery(baseQuery, arguments)
 		def results = [:]
 		
 		queryResults.each() {

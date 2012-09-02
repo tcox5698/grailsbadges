@@ -26,7 +26,6 @@ class UserDashboardControllerTests {
 		returnedPerson = new Person(name: "returnPerson", email:"returnEmail")
 
     	controller.springSecurityService = [currentUser:inputPerson]
-    			
     }
 
 	void testUserStrengthsChartData_ForOneAchievement() {
@@ -63,7 +62,7 @@ class UserDashboardControllerTests {
 	void testUserProgressDepthChartData_CalculatesDatedWeightedProgress() {
 		def expectedDate = new Date();
     	def expectedAchievements = hive.provideUnlockedAchievements(6, returnedPerson)
-    	def skillLevels = hive.provideSkillLevels(6)
+    	def skillLevels = hive.provideSkillLevels(7)
     	//skilllevels: 1,2,3,4,5,6
     	
     	def n = 0
@@ -86,7 +85,6 @@ class UserDashboardControllerTests {
     	response.format = "json"
     	
     	objectServiceController.demand.find(1) {UnlockedAchievementCriteria achievementCriteria ->
-    		assertEquals("from UnlockedAchievement a where a.person = :person", achievementCriteria.queryString)
     		assertEquals(["person":inputPerson],achievementCriteria.arguments)
 			return expectedAchievements
     	}    	
@@ -129,7 +127,6 @@ class UserDashboardControllerTests {
     	response.format = "json"
     	
     	objectServiceController.demand.find(1) {UnlockedAchievementCriteria achievementCriteria ->
-    		assertEquals("from UnlockedAchievement a where a.person = :person", achievementCriteria.queryString)
     		assertEquals(["person":inputPerson],achievementCriteria.arguments)
 			return expectedAchievements
     	}    	
@@ -159,7 +156,6 @@ class UserDashboardControllerTests {
     	response.format = "json"
     	
     	objectServiceController.demand.find(1) {UnlockedAchievementCriteria achievementCriteria ->
-    		assertEquals("from UnlockedAchievement a where a.person = :person", achievementCriteria.queryString)
     		assertEquals(["person":inputPerson],achievementCriteria.arguments)
 			return [expectedUnlockedAchievement]
     	}    	
@@ -185,6 +181,7 @@ class UserDashboardControllerTests {
     	)
     	objectServiceController.demand.find(1) { unlockedAchievementCriteria ->
     		assertEquals(inputPerson, unlockedAchievementCriteria.arguments.person)
+    		assertEquals("DESC", unlockedAchievementCriteria.orderArgs.unlockedDate)
     		assertEquals(4, unlockedAchievementCriteria.maxResults)
     		return [expectedUnlockedAchievement]
     	}

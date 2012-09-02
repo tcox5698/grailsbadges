@@ -75,7 +75,6 @@ class ObjectServiceTests extends GroovyTestCase {
 		assert existingPerson.equals(readPerson)
 		
 		def criteria = new PersonCriteria(
-			queryString: " from Person p where p.name = :name", 
 			arguments:[name: readPerson.name]
 		)
 		

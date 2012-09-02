@@ -28,7 +28,6 @@ class LoginCountCriteriaTests extends GroovyTestCase {
         def arguments = [person:existingPerson] 
         
         def countCriteria = new LoginCountCriteria(
-        	queryString: " from LoginCount c where c.person = :person",
         	arguments: arguments
         )
         
