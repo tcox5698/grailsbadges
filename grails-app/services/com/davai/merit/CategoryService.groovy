@@ -39,30 +39,48 @@ class CategoryService {
 		matchString = /(?i).*${matchString}.*/
 				
 		returnCats = cats.findAll {
-			it.name ==~ matchString
+			def result = it.name ==~ matchString		
+			return result
 		}
 		
 		if (!returnCats.isEmpty()) {
 			return returnCats	
 		}
 		
-		matchString = searchStrings.join(".*|.*")
-		matchString = /(?i).*${matchString}.*/		
-		returnCats = cats.findAll {
-			it.name ==~ matchString
-		}
 		
-		if (!returnCats.isEmpty()) {
-			return returnCats	
-		}
-		
-		def characterList = collectAsCharacters(strings)
-		
-		if (characterList.containsAll(strings)) {
-			return []
-		}
+		searchStrings = searchStrings.findAll{it.size() > 1}
+		if (searchStrings.size() > 0) {
+			matchString = searchStrings.join(".*|.*")
+			matchString = /(?i).*${matchString}.*/		
+			returnCats = cats.findAll {
+				def result = it.name ==~ matchString		
+				return result
+			}
+			
+			if (!returnCats.isEmpty()) {
+				return returnCats	
+			}
+			
+			matchString = searchStrings
+				.collect{it.replaceAll(/[aeiouAEIOU]/, "")}
+				.findAll{it.size() > 1}
+				.join(".*|.*")
+			matchString = /(?i).*${matchString}.*/						
+			
+			returnCats = cats.findAll{
+				def checkName = it.name.replaceAll(/[aeiouAEIOU]/, "")
+	
+				def result = checkName ==~ matchString
 				
-		filterCats(cats, characterList)
+				return result
+			}
+			
+			if (!returnCats.isEmpty()) {
+				return returnCats	
+			}
+		}		
+		
+		return []
 	}
 	
 	def collectAsCharacters(List strings) {
