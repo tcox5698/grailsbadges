@@ -63,3 +63,7 @@ footer.container.navbar-fixed-top {
 .dashCell {
 	overflow: auto;
 }
+
+.dashCell a {
+	float:left;
+}

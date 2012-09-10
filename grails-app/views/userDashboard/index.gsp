@@ -17,6 +17,7 @@
 					 style="SHORT" timezone="${tz}"/></div>
 		</div>	
 		<% } %>
+		<a href="${createLink(uri:'/userDashboard/userAchievementList')}">(see all achievements)</a>
 		</div> <!-- end span6-->
  	
   		<div class="span6 dashCell">  	

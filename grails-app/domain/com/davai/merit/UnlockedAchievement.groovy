@@ -21,6 +21,14 @@ class UnlockedAchievement implements Serializable {
         return [id, person, messageKey, messageArguments, unlockedDate, skillLevel].join(":") 
     }
     
+    def getMessageArgs() {
+    	if (messageArguments != null && messageArguments.contains(",")) {
+    		return messageArguments.split(",")
+    	}
+    	
+    	return [messageArguments]
+    }
+    
     static constraints = {
     	unlockedDate()
 	    name(nullable:true)
