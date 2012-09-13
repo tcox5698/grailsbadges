@@ -2,6 +2,7 @@ package com.davai.merit.criteria
 
 public class Criteria {
 	def maxResults
+	def offset
 	def arguments = [:]
 	def orderArgs = [:]
 	def likeArgs = [:]
@@ -11,8 +12,22 @@ public class Criteria {
 	}
 	
 	
+	def count() {
+		def finalQuery = buildFinalQuery(getBaseQuery())
+
+		finalQuery = " select count(*) " + finalQuery
+		
+		likeArgs.each() {
+			arguments.put(it.key, "%${it.value}%")
+		}
+
+		return getDomainClass().executeQuery(finalQuery, arguments)[0]
+	}
+	
 	def find() {
 		def finalQuery = buildFinalQuery(getBaseQuery())
+		
+
 
 		likeArgs.each() {
 			arguments.put(it.key, "%${it.value}%")
@@ -21,6 +36,7 @@ public class Criteria {
 		def pagingParams = [:]
 				
 		if (maxResults) pagingParams.put('max', maxResults)
+		if (offset) pagingParams.put('offset',offset)
 				
 		log.trace "finalQuery: " + ["queryString":finalQuery,"arguments":arguments]	
 

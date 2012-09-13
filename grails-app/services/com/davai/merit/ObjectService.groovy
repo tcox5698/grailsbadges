@@ -13,6 +13,10 @@ class ObjectService {
 		return criteria.find()
 	}
 	
+	def count(Criteria criteria) {
+		return criteria.count()
+	}
+	
 	def save(Object object) {
 		if (object.isAttached()) {
 			object = object.merge()

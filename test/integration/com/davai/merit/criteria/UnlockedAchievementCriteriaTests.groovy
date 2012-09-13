@@ -104,6 +104,18 @@ class UnlockedAchievementCriteriaTests extends GroovyTestCase {
 		assert gotOne
 	}
 	
+	void testCount() {
+		def expectedAchievements = objectHive.provideUnlockedAchievements(10)
+		
+		def unlockedCriteria = new UnlockedAchievementCriteria()
+			
+		//EXECUTE
+		def count = objectService.count(unlockedCriteria)		
+		
+		//VERIFY
+		assert count == 10
+	}
+	
 	void testOrderByUnlockedDateAsc() {
 		def expectedAchievements = objectHive.provideUnlockedAchievements(10)
 		

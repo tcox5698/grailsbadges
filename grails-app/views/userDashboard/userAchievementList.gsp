@@ -14,6 +14,8 @@
   				<th>Multiplier</th>
   
   			</tr>
+  			<tr><th colspan="100%"><g:paginate controller="userDashboard" action="userAchievementList" 
+  				total="${achievementCount}" max="7"/></th></tr>
 		<% unlockedAchievements.each { achievement -> %>
   			<tr>
   				<td><h3><g:formatDate date="${achievement.unlockedDate}" type="date"

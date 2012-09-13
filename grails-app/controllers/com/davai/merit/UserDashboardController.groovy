@@ -25,21 +25,34 @@ class UserDashboardController {
     	render view:"index", model: [unlockedAchievements: unlockedAchievements]	
     }
     
+    def userAchievementCount() {
+    	def person = springSecurityService.currentUser
+    	
+    	def arguments = ["person":person]
+    	
+    	def criteria = new UnlockedAchievementCriteria(
+    			arguments:arguments	
+    	)
+    	
+    	return objectService.count(criteria)    
+    }
+    
     def userAchievementList() {
     	def person = springSecurityService.currentUser
     	
     	def arguments = ["person":person]
    		def orderArgs = ["unlockedDate":"DESC"]
-
     	
     	def criteria = new UnlockedAchievementCriteria(
     			arguments:arguments,
-				orderArgs:orderArgs		
+				orderArgs:orderArgs,
+				offset:params.offset?:null,
+				maxResults:params.max?:7		
     	)
     	
     	def unlockedAchievements = objectService.find(criteria)
 
-    	render view:"userAchievementList", model: [unlockedAchievements: unlockedAchievements]	    
+    	render view:"userAchievementList", model: [unlockedAchievements: unlockedAchievements, achievementCount:userAchievementCount()]	    
     }
 
 	def userStrengthsChartData() {
