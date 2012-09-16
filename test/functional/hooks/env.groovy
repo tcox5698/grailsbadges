@@ -1,5 +1,6 @@
 import org.codehaus.groovy.grails.test.support.GrailsTestRequestEnvironmentInterceptor
 import com.davai.merit.*
+import com.davai.merit.featuretestutil.*
 
 this.metaClass.mixin (cucumber.runtime.groovy.Hooks)
 
@@ -9,6 +10,7 @@ GrailsTestRequestEnvironmentInterceptor scenarioInterceptor
 Before () {
     scenarioInterceptor = new GrailsTestRequestEnvironmentInterceptor (appCtx)
     scenarioInterceptor.init ()
+    FitContext.initialize(appCtx)
 }
 
 After () {

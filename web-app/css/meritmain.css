@@ -67,3 +67,11 @@ footer.container.navbar-fixed-top {
 .dashCell a {
 	float:left;
 }
+
+.step,  .currentStep {
+	margin: 0px 5px 0px 5px;
+}
+
+.pagingCell {
+	text-align: center;
+}
