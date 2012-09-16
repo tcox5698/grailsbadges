@@ -3,6 +3,7 @@
    <head>
 	  <meta name="layout" content="main">   
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Merit Badges - Dashboard</title>      
    </head>
   <body>
   	<div class="row-fluid dashRow">

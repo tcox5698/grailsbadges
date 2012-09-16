@@ -1,6 +1,8 @@
 import org.codehaus.groovy.grails.test.support.GrailsTestRequestEnvironmentInterceptor
 import com.davai.merit.*
 import com.davai.merit.featuretestutil.*
+import geb.binding.BindingUpdater
+import geb.Browser
 
 this.metaClass.mixin (cucumber.runtime.groovy.Hooks)
 
@@ -11,6 +13,9 @@ Before () {
     scenarioInterceptor = new GrailsTestRequestEnvironmentInterceptor (appCtx)
     scenarioInterceptor.init ()
     FitContext.initialize(appCtx)
+    
+    bindingUpdater = new BindingUpdater (binding, new Browser ())
+    bindingUpdater.initialize ()    
 }
 
 After () {
@@ -22,7 +27,11 @@ After () {
 		achv.delete(flush:true)
 	}
 	
+	LoginCount.executeUpdate("delete LoginCount c")
 	SkillLevel.executeUpdate("delete SkillLevel s")
     Category.executeUpdate("delete Category c")
 	Person.executeUpdate("delete Person p")
+	
+	
+	bindingUpdater.remove()
 }
