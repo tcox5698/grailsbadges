@@ -3,13 +3,14 @@
    <head>
 	  <meta name="layout" content="main">   
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Merit Badges - User Achievements</title>
    </head>
   <body>
-  		<table class="table table-condensed">
+  		<table class="table table-condensed" id="userAchievementListTable">
   			<thead >
   			<tr><th colspan="100%" class="pagingCell"><g:paginate controller="userDashboard" action="userAchievementList" 
   				total="${achievementCount}" max="7"/></th></tr>
-  			<tr>
+  			<tr id="columnHeaders">
   				<th>Date</th>
   				<th>Description</th>
 				<th>Categories</th>  				  				

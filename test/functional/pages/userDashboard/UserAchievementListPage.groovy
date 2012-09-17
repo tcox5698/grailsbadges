@@ -7,7 +7,7 @@ class UserAchievementListPage extends Page {
     static url = "userDashboard/userAchievementList"
 
     static at = {
-        title ==~ /Merit Badges/
+        title ==~ /Merit Badges - User Achievements/
     }
 
     static content = {

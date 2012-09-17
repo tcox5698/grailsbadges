@@ -9,6 +9,7 @@ def class FitContext {
 	def appCtx
 	def user
 	def objectService
+	def userPassword = "inputPassword"
 	
 	public static initialize(appCtx) {
 		singleton = new FitContext(
@@ -24,10 +25,14 @@ def class FitContext {
 		return singleton.user        			
 	}
 	
+	static giveUserPassword() {
+		return singleton.userPassword
+	}
+	
 	def givePerson() {
 		def person = singleton.objectService.save(new Person(
 			username: "cucumberUser",
-			password: "inputPassword", 
+			password: singleton.userPassword, 
 			name: "inputName",
 			accountLocked:"false",
 			accountExpired:"false",
