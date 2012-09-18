@@ -28,7 +28,6 @@ When(~/^I display my achievement list$/) { ->
 Then(~/^I see the following in the list$/) { Object dataTable ->
 	List<Map<String, String>> expectedRows = dataTable.asMaps()
 	def expectedListOfMaps = []
-	//	| Date 		| AchievementName 	| Categories 	| SkillLevelName 	| Multiplier 	|
 	
 	for (row in expectedRows) {
 		def date = row.get("Date")
