@@ -3,7 +3,7 @@ Feature: Display User's complete list of achievements
 	I want to see a list of all my achievements
 	So that I can see the details behind my scores.
 
-Scenario: User has one achievement.
+Scenario: User has two achievements.
 	Given I have logged in 
 	And I have the following achievements
 	| Date 		| Name 			| SkillLevelMultiplier 	| 	Category 		|
