@@ -11,7 +11,7 @@ heroku_txf is not working.  Instead for now you have to heroku_backup.sh of prod
 # Commit and push the application.properties change to the central repo.
 # Tag repository with the app.version: {code}git tag -a v0.5 -m 'version 0.5'{code}
 # Push the tags to the central repo: {code}git push origin master --tags{code}
-# Edit application.properties on master and advance the app.version to the next snapshot version.
+# Edit application.properties on master and advance the app.version to the next snapshot version.  Commit and push this.
 # Execute: git push herokustage /[tag/]:master, ie.: {code}git push herokustage v0.5:master{code}
 # Test it!
 

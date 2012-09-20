@@ -1,7 +1,7 @@
 h1. Upgrade production
 # Upgrade Staging first and test
-# Make sure you're on master
-# Execute:  git push herokuprod master
+{warning}For some reason prod requires this "peeling" syntax to get at the commit object for the annotated tag{warning}
+# Execute:  git push herokuprod +/[tag/]~0:master. {code}git push herokuprod +v0.8~0:master{code}
 # For forward development:
 ## download a new backup to local machine: 
 {code}heroku_backup.sh meritprod{code}
