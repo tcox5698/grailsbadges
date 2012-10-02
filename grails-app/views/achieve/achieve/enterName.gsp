@@ -1,4 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
 <html>
 <head>
   <meta name="layout" content="main">
@@ -66,5 +67,19 @@
       </div>
     </fieldset>
   </g:form>
+<script>
+	jQuery.noConflict();
+	jQuery(function() {	
+
+		jQuery.ajaxSetup({"error":function(XMLHttpRequest,textStatus, errorThrown) { 
+			alert("Ouch! Something went wrong - sorry, but we have to start over.")
+			window.location.href='<g:createLink controller="userDashboard" />'		
+		}});		
+			
+		jQuery( "#name" ).autocomplete({
+			source: '<g:createLink controller="achieve" action="achievementList" />'
+		});		
+	});
+</script>  
 </body>
 </html>

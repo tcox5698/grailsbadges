@@ -38,6 +38,19 @@ class AchieveController {
 		conversation.unlockedAchievement.skillLevel = SkillLevel.read(params.skillLevel)
 	}
 
+	def achievementList() {		
+		def likeArguments = ["name":params.term]
+		def results = objectService.find(new UnlockedAchievementCriteria(likeArgs:likeArguments))
+	
+		render(contentType: "text/json") {
+			def options = []
+ 			results.each{r ->
+ 				options.add(r.name)
+ 			}
+ 			return options
+		}	
+	}
+
 	def categoryList() {		
 		def likeArguments = ["name":params.term]
 		def results = objectService.find(new CategoryCriteria(likeArgs:likeArguments))
