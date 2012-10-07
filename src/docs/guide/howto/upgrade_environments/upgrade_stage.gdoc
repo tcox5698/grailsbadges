@@ -9,7 +9,9 @@ h1. Upgrade stage
 # Tag repository with the app.version: {code}git tag -a v0.5 -m 'version 0.5'{code}
 # Push the tags to the central repo: {code}git push origin master --tags{code}
 # Edit application.properties on master and advance the app.version to the next snapshot version.  Commit and push this.
-# Execute: git push herokustage /[tag/]:master, ie.: {code}git push herokustage v0.5:master{code}
+# Execute: git push {code}herokustage +[tag]~{commit}:master{code}, ie.: {code}git push herokustage +v0.5~/{commit/}:master{code}
 # Test it!
 
 {warning}At this point - if successful - proceed with pushing to Production!{warning}
+
+
