@@ -25,9 +25,9 @@ Given(~/^I have the following achievements$/) { Object dataTable ->
 		def dateString = row.get("Date")
 		def unlockedDate = dateString != null ? DateFormat.getDateInstance(DateFormat.SHORT).parse(row.get("Date")) : null
 		def achievementName = row.get("Name")
-		def category = giveCategory(row.get("Category"))
-		def skillLevel = giveSkillLevel(row.get("SkillLevelMultiplier"))
-		def achievement = giveUnlockedAchievement(achievementName, FitContext.giveUser(), [category], 
+		def category = FitContext.giveCategory(row.get("Category"))
+		def skillLevel = FitContext.giveSkillLevel(row.get("SkillLevelMultiplier"))
+		def achievement = FitContext.giveUnlockedAchievement(achievementName, FitContext.giveUser(), [category], 
 			skillLevel, unlockedDate)
 	}
 }
@@ -64,69 +64,6 @@ Then(~/^I see the following in the chart$/) { Object dataTable ->
 		assert String.valueOf(it.value).equals(String.valueOf(actualListOfMaps.get(i).value))		
 	}
 }
-
-def giveUnlockedAchievement(String achievementName, Person person, categories, SkillLevel level, Date unlockedDate) {
-    def achievement = objectService.find(new UnlockedAchievementCriteria(
-    	arguments:[person:person,skillLevel:level,name:achievementName]
-    ))
-    
-    if (!achievement) {
-    	achievement = objectService.save(new UnlockedAchievement(
-			person: person,
-			categories: categories,
-			skillLevel: level,
-			name: achievementName,
-			unlockedDate: unlockedDate?:new java.util.Date()    		
-    	))
-    } else {
-    	categories.each() {cat ->
-    		achievement.each() {achv ->
-    			System.out.println("achv: " + achv.getClass()) 
-	    		achv.addToCategories(cat)
-	    	}
-    	}
-    }
-    
-	assert achievement != null    
-    
-    return achievement
-}
-
-def giveSkillLevel(String skillLevelMultiplier) {
-	def multiplierInt = Integer.parseInt(skillLevelMultiplier)
-
-	def level = objectService.find(new SkillLevelCriteria(
-		arguments:[multiplier: multiplierInt]))
 	
-	if (level) {
-		return level[0]
-	}
-	
-	level = objectService.save(new SkillLevel(
-		name:"cukeskilllevel" + skillLevelMultiplier,
-		description:"cukedesc:" + skillLevelMultiplier,
-		rank:multiplierInt,
-		multiplier:multiplierInt,
-	))
-	
-	assert level != null
-	return level
-}
-
-def giveCategory(String categoryName) {
-	objectService = appCtx.getBean("objectService")
-
-	def exists = objectService.find(new CategoryCriteria(
-		arguments: [name:categoryName]
-	))
-	
-	if (exists.size() > 0) {
-		return exists[0]
-	}
-
-	exists = objectService.save(new Category(name:categoryName))
-	
-	return exists
-}
 
 

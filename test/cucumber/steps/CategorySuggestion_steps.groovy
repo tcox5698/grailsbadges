@@ -1,52 +1,51 @@
 import cucumber.runtime.PendingException
 import com.davai.merit.*
+import com.davai.merit.featuretestutil.*
 
 this.metaClass.mixin (cucumber.runtime.groovy.EN)
 
 def CategoryService categoryService
 def ObjectService objectService
-def results
 
 Given(~/^the category "([^"]*)" exists$/) { String arg1 ->
-	categoryService = appCtx.getBean ("categoryService")
-	objectService = appCtx.getBean("objectService")
-	objectService.save(new Category(name:arg1))
+
+	appCtx.getBean ("objectService").save(new Category(name:arg1))
 }
+
 When(~/^I type "([^"]*)"$/) { String arg1 ->
-	results = categoryService.suggestCategories(arg1)
+	FitContext.results = appCtx.getBean ("categoryService").suggestCategories(arg1)
 }
+
 Then(~/^the application suggests "([^"]*)"$/) { String expectedSuggestion ->
-	assert results.size == 1
-	def actualCategory = results.get(0)
+	System.out.println("RESULTS:" + FitContext.results)
+	def actualSuggestion = FitContext.results.get(0)
 	
-	assert actualCategory.name == expectedSuggestion
+	assert actualSuggestion.name == expectedSuggestion
 }
 
 Given(~'^the following categories exist$') { Object dataTable ->
-	objectService = appCtx.getBean("objectService")
-
 	List<List<String>> rows = dataTable.raw()
 	
 	for (row in rows) {
-		objectService.save(new Category(name:row.get(0)))	
+		appCtx.getBean ("objectService").save(new Category(name:row.get(0)))	
 	}
 }
 
 Then(~'^the application suggests the following$') { Object dataTable ->
 	List<List<String>> rows = dataTable.raw()
-	def expectedCats = rows.collect{it ->
+	def expectedSuggestions = rows.collect{it ->
 		it.get(0)
 	}	
 	
-	def actualCats = results.collect{it -> 
+	def actualSuggestions = FitContext.results.collect{it -> 
 		return it.name
 	}
 	
-	assert actualCats.containsAll(expectedCats)
-	assert expectedCats.containsAll(actualCats)
+	assert actualSuggestions.containsAll(expectedSuggestions)
+	assert expectedSuggestions.containsAll(actualSuggestions)
 }
 
 
 Then(~'^the application suggests nothing$') { ->
-    assert results.size == 0
+    assert FitContext.results.size == 0
 }
