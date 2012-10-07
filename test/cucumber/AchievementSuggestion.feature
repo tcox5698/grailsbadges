@@ -18,6 +18,7 @@ Scenario: typing more reduces suggested achievements
 	| Java		| 
 	| Database Development		| 	
 	| JavaScript|
+	| JavaScript|
 	When I type achievement name "JavaSc"
 	Then the application suggests the following	achievements
 	|AchievementName |

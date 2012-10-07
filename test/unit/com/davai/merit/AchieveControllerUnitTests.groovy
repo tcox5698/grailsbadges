@@ -97,6 +97,71 @@ class AchieveControllerUnitTests {
     	assertTrue("whoops: " + response.json, response.json.containsAll(expectedCategoryNames))
     }
     
+    void testAchievementList_SuggestsDistinctNames() {
+    	def inputAchievementSearchTerm = "inputTerm"
+    	def expectedAchievementName = "expectedAchievementName"
+    	def expectedAchievements = hive.provideUnlockedAchievements(2)
+    	
+    	params.term = inputAchievementSearchTerm
+    	
+    	
+    	expectedAchievements.each{
+    		it.name = expectedAchievementName
+    	}
+    	
+    	response.format = "json"
+    	objectServiceController.demand.find(1) {UnlockedAchievementCriteria achievementCriteria ->
+    		assertEquals(["name":inputAchievementSearchTerm],achievementCriteria.likeArgs)
+			return expectedAchievements
+    	}
+    	
+		controller.objectService = objectServiceController.createMock()    	
+    		
+    
+    	//EXECUTE
+    	controller.achievementList()
+    	
+    	assertEquals(1, response.json.length())
+    	
+    	assertTrue("whoops: " + response.json, response.json.contains(expectedAchievementName))    	
+    }
+    
+    void testAchievementList_SuggestsNamesInAlphaOrder() {
+    	def inputAchievementSearchTerm = "inputTerm"
+    	def expectedAchievementName = "expectedAchievementName"
+    	def expectedAchievements = hive.provideUnlockedAchievements(4)
+    	def names = ["Bradley","Apple","Darwin","Curlington"]
+    	
+    	params.term = inputAchievementSearchTerm
+    	
+    	expectedAchievements.eachWithIndex{it, i ->
+    		it.name = names[i]
+    	}
+    	
+    	
+    	response.format = "json"
+    	objectServiceController.demand.find(1) {UnlockedAchievementCriteria achievementCriteria ->
+    		assertEquals(["name":inputAchievementSearchTerm],achievementCriteria.likeArgs)
+			return expectedAchievements
+    	}
+    	
+		controller.objectService = objectServiceController.createMock()    	
+    		
+    
+    	//EXECUTE
+    	controller.achievementList()
+    	
+    	assertEquals(4, response.json.length())
+    	
+    	assertTrue("whoops: " + response.json, response.json.containsAll(names))    	
+    	
+    	names.sort()
+    	
+    	response.json.eachWithIndex{it, i ->
+    		assert it.equals(names[i])
+    	}
+    }    
+    
 	void testPopulateCategory_OneNewCategory() {
     	def conversation = [:]
     	params.selectedCategories = "testCategory"

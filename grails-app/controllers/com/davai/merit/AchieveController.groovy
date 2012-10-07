@@ -41,13 +41,15 @@ class AchieveController {
 	def achievementList() {		
 		def likeArguments = ["name":params.term]
 		def results = objectService.find(new UnlockedAchievementCriteria(likeArgs:likeArguments))
+		
+		def nameSet = [] as Set
+		
+		nameSet.addAll(results.collect{
+			it.name
+		})
 	
 		render(contentType: "text/json") {
-			def options = []
- 			results.each{r ->
- 				options.add(r.name)
- 			}
- 			return options
+			return nameSet.sort()
 		}	
 	}
 
