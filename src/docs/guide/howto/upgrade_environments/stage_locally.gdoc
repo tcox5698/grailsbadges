@@ -4,8 +4,7 @@ h2. Overview
 Stage locally before staging to the heroku server.
 
 h2. Steps
-# Copy heroku production to heroku staging using {code}heroku_txf.sh{code}
-{warning}heroku_txf.sh is not working now.  Looks like a Heroku problem.  See "Upgrade Stage" for work around.{warning}
+# Copy heroku production to heroku staging using {code}heroku_txf.sh{code}.  For example: {code}./heroku_txf.sh meritprod meritstage{code}
 # Backup heroku staging to local file with {code}heroku_backup.sh{code}
 # Load local file into local staging database with {code}db_restore_from_dump.sh{code}
 # Copy the local staging database to local dev and test envs with {code}db_reset.sh{code}
