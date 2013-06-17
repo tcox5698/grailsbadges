@@ -16,3 +16,6 @@ web-app/WEB-INF/tld/fmt.tld
 .bbprojectd
 MeritBadges.bbprojectd/
 chromedriver.log
+*.iml
+out/
+.idea/

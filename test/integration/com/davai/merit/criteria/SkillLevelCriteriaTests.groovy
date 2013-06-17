@@ -20,8 +20,8 @@ class SkillLevelCriteriaTests extends GroovyTestCase {
 		def actualSkillLevels = objectService.find(new SkillLevelCriteria())
 		
 		//VERIFY
-		assert expectedSkillLevels.size() == actualSkillLevels.size()
-		assert expectedSkillLevels.containsAll(actualSkillLevels)
+		assert expectedSkillLevels.size()  == actualSkillLevels.size()
+        assert actualSkillLevels.containsAll(expectedSkillLevels)
 	}
 	
 	void testFindByName() {
