@@ -46,6 +46,8 @@ grails.project.dependency.resolution = {
         test ("org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion")      
 
         test ("org.codehaus.geb:geb-junit4:$gebVersion")
+
+        provided "com.newrelic.agent.java:newrelic-agent:2.19.1"
   
     }
 
