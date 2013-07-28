@@ -3,8 +3,7 @@
    <head>
 	  <meta name="layout" content="main">   
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-       <newrelic:browserTimingHeader/>
-		<title>Merit Badges - Dashboard</title>      
+		<title>Merit Badges - Dashboard</title>
    </head>
   <body>
   	<div class="row-fluid dashRow">
@@ -161,7 +160,6 @@
 			  ).clear().draw();
 	}	
 </script>
-  <newrelic:browserTimingFooter/>
   </body>
 
 </html>

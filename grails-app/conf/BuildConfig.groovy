@@ -47,8 +47,8 @@ grails.project.dependency.resolution = {
 
         test ("org.codehaus.geb:geb-junit4:$gebVersion")
 
-        compile "com.newrelic.agent.java:newrelic-agent:2.19.1"
-  
+        test "org.spockframework:spock-grails-support:0.7-groovy-2.0"
+
     }
 
     plugins {
@@ -58,6 +58,9 @@ grails.project.dependency.resolution = {
         
         test ":cucumber:0.6.0"
         test ":geb:$gebVersion"
+        test(":spock:0.7") {
+            exclude "spock-grails-support"
+        }
         
         compile ":webflow:2.0.0"
     
