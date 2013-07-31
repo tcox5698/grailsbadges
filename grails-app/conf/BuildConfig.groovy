@@ -49,6 +49,8 @@ grails.project.dependency.resolution = {
 
         test "org.spockframework:spock-grails-support:0.7-groovy-2.0"
 
+        compile "org.grails:grails-webflow:$grailsVersion"
+
     }
 
     plugins {
@@ -61,8 +63,10 @@ grails.project.dependency.resolution = {
         test(":spock:0.7") {
             exclude "spock-grails-support"
         }
-        
-        compile ":webflow:2.0.0"
+
+        compile ':webflow:2.0.0', {
+            exclude 'grails-webflow'
+        }
     
         runtime ":hibernate:$grailsVersion"
         runtime ":resources:1.1.5"
