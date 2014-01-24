@@ -1,0 +1,17 @@
+h1. Generate db scripts for gorm
+{code}dbm-gorm-diff [file-name] --add{code}	
+	
+h1. Get free clipart	
+{code}http://www.clipartpal.com/clipart_pd{code}	
+
+h1. Git Repositories
+{code}
+cloudbees	ssh://git@git.cloudbees.com/davai/meritbadges.git (fetch)
+cloudbees	ssh://git@git.cloudbees.com/davai/meritbadges.git (push)
+herokuprod	git@heroku.com:meritprod.git (fetch)
+herokuprod	git@heroku.com:meritprod.git (push)
+herokustage	git@heroku.com:meritstage.git (fetch)
+herokustage	git@heroku.com:meritstage.git (push)
+origin	ssh://tom@192.168.1.103/home/tom/gitcentral/MeritBadgesGrails (fetch)
+origin	ssh://tom@192.168.1.103/home/tom/gitcentral/MeritBadgesGrails (push)
+{code}

@@ -1,0 +1,13 @@
+h1. Upgrade production
+# Upgrade Staging first and test
+{warning}For some reason prod requires this "peeling" syntax to get at the commit object for the annotated tag{warning}
+# Execute:  git push herokuprod +/[tag/]~0:master. {code}git push herokuprod +v0.8~0:master{code}
+# For forward development:
+## download a new backup to local machine: 
+{code}heroku_backup.sh meritprod{code}
+## pull the dump into your stage, test and dev environments: 
+{code}db_restore_from_dump.sh mbgrails_stage meritprod.dump{code}
+## update application.properties and increment to next version snapshot
+{warning}You may want to upgrade Grails back to 2.0.4 - depends on whether Heroku has caught up yet.{warning}
+## Push to central repo. Checkout your new branch and move forward!
+{warning}You may want to delete the development branch that you were working with.{warning}

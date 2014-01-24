@@ -1,0 +1,77 @@
+body {
+	padding: 60px;
+}
+
+footer.container.navbar-fixed-top {
+		top: auto;
+		bottom: 0;
+		background-color: white
+}    
+
+.meritBadge {
+		width: 100px;
+		background-repeat: no-repeat;
+		background-position: center center;
+		text-align: center;
+		/*border-width: 1px;
+		border-color: black;
+		border-style: solid;*/				
+		margin: 10px;
+		float:left;
+}			
+
+.meritBadge img {
+		width: 75px;
+		height: 75px;
+		margin-top: 15%;
+}
+
+.meritBadgeTitle {
+		margin-top: 5%;
+		font-weight: bold;
+}
+
+.meritBadgeDate {
+		font-size: 8pt;
+}	
+
+.home_image {
+	margin:0 20%;
+	width: 170px;
+	height: 110px;
+}
+
+.landscape-img {
+	background-image:url('../images/sunburst1.jpg');
+	background-size:1600px;
+	background-repeat:no-repeat;
+	background-position:41% 54%;
+}
+
+.categoryButton {
+	margin: 2px; 
+}
+
+.radioLabel {
+	font-size:19.5px
+}
+
+.dashRow {
+
+}
+
+.dashCell {
+	overflow: auto;
+}
+
+.dashCell a {
+	float:left;
+}
+
+.step,  .currentStep {
+	margin: 0px 5px 0px 5px;
+}
+
+.pagingCell {
+	text-align: center;
+}
