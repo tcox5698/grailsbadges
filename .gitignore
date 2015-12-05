@@ -19,3 +19,7 @@ chromedriver.log
 *.iml
 out/
 .idea/
+libpeerconnection.log
+*.DS_Store
+
+

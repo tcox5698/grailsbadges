@@ -13,7 +13,7 @@ grails.project.dependency.resolution = {
         // uncomment to disable ehcache
         // excludes 'ehcache'
     }
-    log "error" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
+    log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
     checksums true // Whether to verify checksums on resolve
     
 	def gebVersion = "0.7.2"
@@ -25,6 +25,7 @@ grails.project.dependency.resolution = {
         grailsHome()
         grailsCentral()
         mavenCentral()
+        grailsRepo "https://grails.org/plugins"
 
         // uncomment these to enable remote dependency resolution from public Maven repositories
         //mavenCentral()

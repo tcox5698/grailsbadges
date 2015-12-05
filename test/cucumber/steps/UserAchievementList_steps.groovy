@@ -17,7 +17,9 @@ Given(~/^I have logged in$/) { ->
 	$("input", name: "j_password").value(FitContext.giveUserPassword())		
 	
 	$("a", id: "loginButton").click()
-	
+
+	sleep(2000)
+
 	at UserDashboardPage
 }
 
