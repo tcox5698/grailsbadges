@@ -16,8 +16,7 @@ class LoginEventHandlerServiceTests {
 	def existingCountValue = 6
 
 	def expectedPerson
-	
-	@Before
+
 	void setUp() {
 		objectServiceController = mockFor(ObjectService)
 	
