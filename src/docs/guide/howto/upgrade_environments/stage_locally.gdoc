@@ -8,10 +8,9 @@ Install the herokubed gem for some heroku commands documented below. (https://gi
 
 h2. Steps
 # Copy heroku production to heroku staging using {code}ktransferdb{code}.  For example: {code}ktransferdb meritprod meritstage{code}
-# Backup heroku staging to local file with {code}heroku_backup.sh{code}
-# Load local file into local staging database with {code}db_restore_from_dump.sh{code}
-# Copy the local staging database to local dev and test envs with {code}db_reset.sh{code}
-# Execute database migration on dev and test with {code}grails dbm-update{code} 
+# Backup heroku staging to local file with {code}kbackupdb{code}. For example: {code}kbackupdb meritstage{code}
+# Load local file into local staging, dev and test databases with {code}kloaddumplocally{code}. For example: {code}kloaddumplocally meritstage mbgrails_stage {code}
+# Execute database migration on dev and test with {code}grails dbm-update{code}
 ## Don't forget to add {code}-Dgrails.env=test{code} for test environment.
 # Purge the test database with {code}db_purge.sh{code}.  
 # Run automated tests with {code}grails test-app{code}.
