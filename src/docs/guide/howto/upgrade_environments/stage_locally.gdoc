@@ -7,11 +7,8 @@ h2. Prerequisite
 Install the herokubed gem for some heroku commands documented below. (https://github.com/tcox5698/herokubed)
 
 h2. Steps
+# Run automated tests with {code}grails test-app{code}.
 # Copy heroku production to heroku staging using {code}ktransferdb{code}.  For example: {code}ktransferdb meritprod meritstage{code}
 # Backup heroku staging to local file with {code}kbackupdb{code}. For example: {code}kbackupdb meritstage{code}
-# Load local file into local staging, dev and test databases with {code}kloaddumplocally{code}. For example: {code}kloaddumplocally meritstage mbgrails_stage {code}
-# Execute database migration on dev and test with {code}grails dbm-update{code}
-## Don't forget to add {code}-Dgrails.env=test{code} for test environment.
-# Purge the test database with {code}db_purge.sh{code}.  
-# Run automated tests with {code}grails test-app{code}.
+# Load local file into local staging database with {code}kloaddumplocally{code}. For example: {code}kloaddumplocally meritstage mbgrails_stage {code}
 # Run manual regression tests in stage environment.  Startup the app in staging with {code}grails run-app -Dgrails.env=stage{code} This will make sure the auto database migration works properly on startup of the web application, as it will occur on heroku.
